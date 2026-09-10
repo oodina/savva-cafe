@@ -242,8 +242,8 @@
   @media (prefers-reduced-motion: reduce){ .mood-bg{ animation:none; } }
 
   /* ---------- Visit ---------- */
-  .visit-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; align-items:stretch; }
-  @media (max-width:980px){ .visit-grid{ grid-template-columns:1fr; max-width:420px; margin-inline:auto; } }
+  .visit-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:24px; align-items:stretch; max-width:760px; margin-inline:auto; }
+  @media (max-width:760px){ .visit-grid{ grid-template-columns:1fr; max-width:420px; } }
   .visit-card{
     background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:36px 30px;
     text-align:center; box-shadow:var(--shadow-sm);
@@ -261,14 +261,6 @@
   .visit-row span{ font-size:13.5px; color:var(--ink-soft); }
   .visit-note{ font-size:12px; color:var(--ink-soft); font-style:italic; margin-top:6px; }
   html[lang="ar"] .visit-note{ font-style:normal; }
-  .visit-lottie{
-    width:200px; height:200px; margin-inline:auto; border-radius:var(--radius-md);
-    background:var(--surface-2); overflow:hidden; display:flex; align-items:center; justify-content:center;
-  }
-  .visit-lottie svg{ width:100%; height:100%; }
-  .lottie-credit{ font-size:11px; color:var(--ink-soft); margin-top:14px; max-width:240px; line-height:1.5; }
-  .lottie-credit a{ color:var(--ink-soft); text-decoration:underline; }
-  .visit-cta{ display:flex; justify-content:center; margin-top:36px; }
 
   /* ---------- Why choose us ---------- */
   .why-heading{
@@ -486,17 +478,6 @@
             <svg><use href="#i-pin"/></svg><span data-i18n="ctaDirections"></span>
           </a>
         </div>
-        <div class="visit-card" data-reveal>
-          <div class="visit-lottie" id="visitLottie" aria-hidden="true"></div>
-          <p class="lottie-credit">
-            <a href="https://iconscout.com/lottie-animations/deliveryman-riding-scooter" target="_blank" rel="noopener">Deliveryman Riding scooter</a>
-            by <a href="https://iconscout.com/contributors/nanoagency" target="_blank" rel="noopener">nanoagency</a>
-            on <a href="https://iconscout.com" target="_blank" rel="noopener">IconScout</a>
-          </p>
-        </div>
-      </div>
-      <div class="visit-cta" data-reveal>
-        <a class="btn btn-primary" href="https://www.instagram.com/savva_cafe" target="_blank" rel="noopener" data-i18n="deliveryBtn"></a>
       </div>
     </div>
   </section>
@@ -548,7 +529,6 @@
   </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
 <script>
 (function(){
   "use strict";
@@ -569,7 +549,6 @@
       why2Title:"A place to stay a while", why2Text:"Indoor and outdoor seating, family-friendly, with music running underneath it all.",
       why3Title:"Real, not staged", why3Text:"Every photo on this page comes straight from our own Instagram — this is really us.",
       why4Title:"Easy to find", why4Text:"Right in Bir Uthman, Madinah — see you there.",
-      deliveryBtn:"Delivery",
       menuEyebrow:"On the Menu", menuTitle:"A taste of Savva", menuLead:"A few favourites, straight from Savva's own Instagram.",
       menuTabCoffee:"Coffee", menuTabRefreshers:"Refreshers", menuTabDesserts:"Desserts",
       menuIcedHibiscus:"Ice Hibiscus", menuIcedHibiscusDesc:"Vibrant, lightly sweet-tart iced hibiscus — perfect for a hot day.",
@@ -612,7 +591,6 @@
       why2Title:"مكان يستحق البقاء فيه", why2Text:"جلسات داخلية وخارجية، مناسبة للعائلات، مع موسيقى هادئة ترافق الأجواء.",
       why3Title:"حقيقي وليس مُجمّلاً", why3Text:"كل صورة في هذه الصفحة من حسابنا الحقيقي على إنستغرام — هذا نحن فعلاً.",
       why4Title:"سهل الوصول إليه", why4Text:"في قلب حي بئر عثمان بالمدينة المنورة — بانتظاركم.",
-      deliveryBtn:"التوصيل",
       menuEyebrow:"القائمة", menuTitle:"مذاق سافا", menuLead:"أشهر الأصناف، مباشرة من إنستغرام سافا.",
       menuTabCoffee:"القهوة", menuTabRefreshers:"المشروبات المنعشة", menuTabDesserts:"الحلويات",
       menuIcedHibiscus:"كركديه مثلج", menuIcedHibiscusDesc:"كركديه بارد بلون أحمر زاهٍ ومذاق حلو خفيف — مثالي في الأيام الحارة.",
@@ -817,25 +795,6 @@
   }
 
   /* =====================================================
-     VISIT — delivery rider Lottie animation ("Deliveryman
-     Riding scooter" by nanoagency, via IconScout — real
-     asset the user downloaded and provided). Plays looped;
-     falls back to a static first frame under reduced motion.
-     ===================================================== */
-  function initLottieDelivery(){
-    var el = document.getElementById("visitLottie");
-    if(!el || typeof lottie === "undefined") return;
-    var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    lottie.loadAnimation({
-      container: el,
-      renderer: "svg",
-      loop: !reduceMotion,
-      autoplay: !reduceMotion,
-      path: "anim/deliveryman-scooter.json"
-    });
-  }
-
-  /* =====================================================
      SCROLL REVEAL — fade+rise sections into view once
      ===================================================== */
   function initScrollReveal(){
@@ -859,7 +818,6 @@
   renderDrinks();
   initNavMagnify();
   initHeroOrbParallax();
-  initLottieDelivery();
   initScrollReveal();
 })();
 </script>
