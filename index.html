@@ -9,17 +9,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Markazi+Text:wght@500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#1B120D;
-    --surface:#241811;
-    --surface-2:#2E1F16;
-    --ink:#F3E9DD;
-    --ink-soft:#B9A793;
-    --ink-heading:#FFF8EE;
-    --line:rgba(243,233,221,.13);
-    --accent:#C6A15B;
-    --accent-soft:#C6A15B22;
+    --bg:#064E3B;
+    --surface:#0B5D45;
+    --surface-2:#123F32;
+    --ink:#F7F5EA;
+    --ink-soft:#B7CDBF;
+    --ink-heading:#F7F5EA;
+    --line:rgba(247,245,234,.14);
+    --accent:#F7F5EA;
+    --accent-soft:#F7F5EA1c;
     --accent-copper:#A9673A;
-    --primary-ink:#1B120D;
+    --primary-ink:#064E3B;
     --shadow:0 20px 50px -14px rgba(0,0,0,.55);
     --shadow-sm:0 8px 22px -8px rgba(0,0,0,.45);
     --radius-lg:20px;
@@ -95,18 +95,94 @@
   .mobile-nav a{ text-decoration:none; color:var(--ink); font-weight:600; padding:13px 4px; border-bottom:1px solid var(--line); font-size:15px; }
 
   /* ---------- Hero ---------- */
-  .hero{ position:relative; padding-block:100px 76px; overflow:hidden; text-align:center; }
+  .hero{
+    position:relative; min-height:92vh; display:flex; align-items:center; padding-block:120px 190px;
+    overflow:hidden; text-align:center;
+    background:radial-gradient(circle at 20% 15%, var(--surface) 0%, transparent 45%),
+               radial-gradient(circle at 82% 78%, var(--surface-2) 0%, transparent 50%),
+               var(--bg);
+  }
   #heroCanvas{ position:absolute; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; }
   .hero-glow{
     position:absolute; inset:0; z-index:0; pointer-events:none;
-    background:radial-gradient(ellipse 65% 55% at 50% 20%, var(--accent-soft) 0%, transparent 72%);
+    background:radial-gradient(ellipse 60% 50% at 50% 30%, rgba(247,245,234,.07) 0%, transparent 70%);
   }
-  .hero-inner{ position:relative; z-index:2; max-width:720px; margin-inline:auto; }
-  .hero-arabic{ font-family:'Markazi Text',serif; font-size:26px; color:var(--accent); margin-bottom:6px; display:block; }
-  .hero h1{ font-size:clamp(56px,10vw,108px); line-height:1; letter-spacing:.01em; margin-block:6px 20px; }
-  .hero-lead{ font-size:18px; font-style:italic; color:var(--ink-soft); max-width:44ch; margin:0 auto 34px; font-family:var(--font-display); }
+  .hero-inner{ position:relative; z-index:2; max-width:900px; margin-inline:auto; }
+  .hero-arabic{ font-family:'Markazi Text',serif; font-size:26px; color:var(--ink-soft); margin-bottom:10px; display:block; }
+  .hero h1{
+    font-size:clamp(84px,19vw,240px); line-height:.92; letter-spacing:-.01em; margin-block:0 22px;
+    color:var(--ink-heading); position:relative; z-index:2;
+  }
+  .hero-lead{ font-size:18px; font-style:italic; color:var(--ink-soft); max-width:44ch; margin:0 auto 34px; font-family:var(--font-display); position:relative; z-index:2; }
   html[lang="ar"] .hero-lead{ font-style:normal; }
-  .hero-actions{ display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
+  .hero-actions{ display:flex; gap:14px; flex-wrap:wrap; justify-content:center; position:relative; z-index:2; }
+
+  /* ---------- Floating drink orbs ---------- */
+  .hero-orbs{ position:absolute; inset:0; z-index:1; pointer-events:none; }
+  .drink-orb{
+    position:absolute; will-change:transform; filter:drop-shadow(0 22px 34px rgba(0,0,0,.4));
+    animation:orbFloat 10s ease-in-out infinite;
+  }
+  .drink-orb .cup{
+    position:relative; width:100%; height:100%;
+    clip-path:polygon(16% 0%, 84% 0%, 76% 100%, 24% 100%);
+    background:var(--drink-grad);
+  }
+  .drink-orb .cup::after{
+    content:""; position:absolute; top:2%; bottom:6%; left:14%; width:16%;
+    background:linear-gradient(rgba(255,255,255,.4), rgba(255,255,255,0));
+    filter:blur(1.5px); border-radius:20px;
+  }
+  .drink-orb .rim{
+    position:absolute; top:-8%; left:9%; right:9%; height:16%; border-radius:50%;
+    background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.32);
+  }
+  .orb-latte{ --drink-grad:linear-gradient(160deg,#F3E0C4,#B98A54); top:9%; left:6%; width:118px; height:150px; z-index:1; opacity:.85; animation-duration:12s; }
+  .orb-berry{ --drink-grad:linear-gradient(160deg,#FF9AA6,#C6415A); top:10%; right:8%; width:140px; height:176px; z-index:3; animation-duration:9s; animation-delay:.6s; }
+  .orb-matcha{ --drink-grad:linear-gradient(160deg,#C7E4AE,#5C8A4A); bottom:24%; left:11%; width:104px; height:132px; z-index:1; opacity:.8; filter:blur(.4px) drop-shadow(0 18px 28px rgba(0,0,0,.35)); animation-duration:13s; animation-delay:1.4s; }
+  .orb-coldbrew{ --drink-grad:linear-gradient(160deg,#8C6A4A,#3D2A1C); bottom:8%; right:12%; width:160px; height:204px; z-index:3; animation-duration:11s; animation-delay:.3s; }
+  .orb-citrus{ --drink-grad:linear-gradient(160deg,#FFE59A,#F2A93C); top:44%; left:47%; width:84px; height:106px; z-index:3; animation-duration:8s; animation-delay:.9s; }
+  @keyframes orbFloat{
+    0%{ transform:translate(var(--px,0px),var(--py,0px)) translateY(0) rotate(-4deg); }
+    50%{ transform:translate(var(--px,0px),var(--py,0px)) translateY(-22px) rotate(3deg); }
+    100%{ transform:translate(var(--px,0px),var(--py,0px)) translateY(0) rotate(-4deg); }
+  }
+  @media (max-width:760px){
+    .orb-latte{ width:74px; height:94px; } .orb-berry{ width:86px; height:108px; }
+    .orb-matcha{ width:64px; height:82px; } .orb-coldbrew{ width:98px; height:126px; }
+    .orb-citrus{ width:52px; height:66px; }
+  }
+  @media (max-width:520px){ .orb-matcha, .orb-citrus{ display:none; } }
+
+  /* ---------- Floating glass product card ---------- */
+  .hero-float-card{
+    position:absolute; left:50%; bottom:34px; transform:translateX(-50%); z-index:4;
+    display:flex; align-items:center; gap:16px; padding:14px 22px 14px 14px; max-width:min(92vw,420px);
+    background:rgba(247,245,234,.08); backdrop-filter:blur(18px) saturate(140%);
+    border:1px solid var(--menu-border, #D5E2D0); border-radius:20px;
+    box-shadow:0 20px 40px -16px rgba(0,0,0,.5);
+  }
+  .hero-float-media{
+    width:64px !important; height:64px !important; border-radius:14px; flex:0 0 auto; overflow:hidden;
+    position:relative !important; top:auto !important; left:auto !important; right:auto !important; bottom:auto !important;
+    z-index:auto !important; animation:none !important; filter:none !important; opacity:1 !important;
+  }
+  .hero-float-media .cup{ clip-path:none; border-radius:14px; }
+  .hero-float-media .rim{ display:none; }
+  .hero-float-info{ text-align:start; min-width:0; }
+  .hero-float-info h4{ font-family:var(--font-body); font-size:14.5px; font-weight:700; color:var(--ink-heading); margin-bottom:2px; }
+  .hero-float-info p{ font-size:12px; color:var(--ink-soft); margin-bottom:8px; }
+  .hero-float-row{ display:flex; align-items:center; gap:10px; }
+  .hero-float-note{ font-size:11px; color:var(--ink-soft); font-style:italic; }
+  html[lang="ar"] .hero-float-note{ font-style:normal; }
+  .hero-float-cta{
+    padding:7px 14px; border-radius:999px; border:1px solid var(--ink); background:transparent;
+    color:var(--ink-heading); font-size:11px; font-weight:700; cursor:pointer; text-decoration:none;
+    transition:transform .18s cubic-bezier(.25,1,.35,1), background .18s ease;
+  }
+  .hero-float-cta:hover{ background:rgba(247,245,234,.12); }
+  .hero-float-cta:active{ transform:scale(1.08); }
+  @media (max-width:480px){ .hero-float-card{ bottom:18px; padding:10px 16px 10px 10px; gap:12px; } .hero-float-media{ width:52px; height:52px; } }
 
   /* ---------- Section shell ---------- */
   section{ padding-block:80px; }
@@ -298,6 +374,13 @@
   <section class="hero">
     <canvas id="heroCanvas" aria-hidden="true"></canvas>
     <div class="hero-glow" aria-hidden="true"></div>
+    <div class="hero-orbs" id="heroOrbs" aria-hidden="true">
+      <div class="drink-orb orb-latte" data-depth="0.4"><span class="rim"></span><span class="cup"></span></div>
+      <div class="drink-orb orb-berry" data-depth="1"><span class="rim"></span><span class="cup"></span></div>
+      <div class="drink-orb orb-matcha" data-depth="0.4"><span class="rim"></span><span class="cup"></span></div>
+      <div class="drink-orb orb-coldbrew" data-depth="1.1"><span class="rim"></span><span class="cup"></span></div>
+      <div class="drink-orb orb-citrus" data-depth="1.3"><span class="rim"></span><span class="cup"></span></div>
+    </div>
     <div class="container hero-inner">
       <span class="hero-arabic">سافا</span>
       <h1>Savva</h1>
@@ -309,6 +392,17 @@
         <a href="#concept" class="btn btn-ghost" data-i18n="ctaConcept"></a>
       </div>
     </div>
+    <a class="hero-float-card" href="#menu">
+      <span class="hero-float-media drink-orb orb-berry"><span class="rim"></span><span class="cup"></span></span>
+      <span class="hero-float-info">
+        <h4 data-i18n="drinkIcedMacchiato"></h4>
+        <p data-i18n="drinkIcedMacchiatoDesc"></p>
+        <span class="hero-float-row">
+          <span class="hero-float-note" data-i18n="heroFloatNote"></span>
+          <span class="hero-float-cta" data-i18n="heroFloatCta"></span>
+        </span>
+      </span>
+    </a>
   </section>
 
   <div class="divider"><span class="divider-mark"></span></div>
@@ -476,6 +570,7 @@
       drinkBerrySmoothie:"Mixed Berry Smoothie", drinkBerrySmoothieDesc:"A bright, fruity blend, chilled and smooth.",
       drinkOrangeJuice:"Fresh Orange Juice", drinkOrangeJuiceDesc:"Simple, cold-pressed, and honest.",
       drinkCta:"See on Instagram",
+      heroFloatNote:"Ask in-café for pricing", heroFloatCta:"View Menu",
       menuNote:"Full menu and current prices are available in-café and on Instagram.",
       moodEyebrow:"The Atmosphere", moodTitle:"Where evenings slow down", moodLead:"No two visits to Savva feel quite the same — the atmosphere shifts gently through the day.",
       moodGolden:"Golden Hour", moodTerrace:"Outdoor Terrace", moodNight:"Late Night",
@@ -513,6 +608,7 @@
       drinkBerrySmoothie:"سموذي التوت المشكل", drinkBerrySmoothieDesc:"مزيج فواكه منعش وبارد.",
       drinkOrangeJuice:"عصير برتقال طازج", drinkOrangeJuiceDesc:"بسيط، طازج، وبلا تعقيد.",
       drinkCta:"عرض على إنستغرام",
+      heroFloatNote:"السعر متوفر في المقهى", heroFloatCta:"عرض القائمة",
       menuNote:"القائمة الكاملة والأسعار الحالية متوفرة داخل المقهى وعلى إنستغرام.",
       moodEyebrow:"الأجواء", moodTitle:"حيث تتمهّل الأمسيات", moodLead:"لا تشبه زيارة سافا الأخرى — تتبدّل الأجواء بلطف مع ساعات اليوم.",
       moodGolden:"الساعة الذهبية", moodTerrace:"التراس الخارجي", moodNight:"سهرة متأخرة",
@@ -738,6 +834,43 @@
   }
 
   /* =====================================================
+     HERO ORB PARALLAX — the floating drinks drift gently
+     toward the cursor, closer orbs (higher data-depth) move
+     more, so the composition reads as layered/3D. Smoothed
+     with the same lerp approach as the canvas drift above,
+     layered on top of each orb's own CSS float animation.
+     ===================================================== */
+  function initHeroOrbParallax(){
+    var wrap = document.getElementById("heroOrbs");
+    if(!wrap) return;
+    var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if(reduceMotion) return;
+    var orbs = Array.prototype.slice.call(wrap.querySelectorAll(".drink-orb")).map(function(el){
+      return { el:el, depth:parseFloat(el.getAttribute("data-depth")) || 0.5, x:0, y:0 };
+    });
+    var target = { x:0, y:0 };
+    var hero = wrap.parentElement;
+
+    hero.addEventListener("pointermove", function(e){
+      var rect = hero.getBoundingClientRect();
+      target.x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+      target.y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+    });
+    hero.addEventListener("pointerleave", function(){ target.x = 0; target.y = 0; });
+
+    function tick(){
+      orbs.forEach(function(o){
+        o.x += (target.x * o.depth * 16 - o.x) * 0.05;
+        o.y += (target.y * o.depth * 12 - o.y) * 0.05;
+        o.el.style.setProperty("--px", o.x.toFixed(2) + "px");
+        o.el.style.setProperty("--py", o.y.toFixed(2) + "px");
+      });
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  /* =====================================================
      SCROLL REVEAL — fade+rise sections into view once
      ===================================================== */
   function initScrollReveal(){
@@ -761,6 +894,7 @@
   renderDrinks();
   initNavMagnify();
   initHeroCanvas();
+  initHeroOrbParallax();
   initScrollReveal();
 })();
 </script>
