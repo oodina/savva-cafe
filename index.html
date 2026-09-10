@@ -261,18 +261,49 @@
   .visit-note{ font-size:12px; color:var(--ink-soft); font-style:italic; margin-top:6px; }
   html[lang="ar"] .visit-note{ font-style:normal; }
 
-  /* ---------- Delivery scooter strip ---------- */
-  .scooter-track{ position:relative; height:110px; overflow:hidden; background:var(--surface); }
-  .scooter-svg{
+  /* ---------- Why choose us ---------- */
+  .why-heading{
+    text-align:center; font-size:clamp(20px,2.6vw,26px); margin-top:64px; margin-bottom:28px;
+    color:var(--ink-heading);
+  }
+  .why-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+  @media (max-width:860px){ .why-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:480px){ .why-grid{ grid-template-columns:1fr; } }
+  .why-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md);
+    padding:24px 20px; text-align:center;
+  }
+  .why-card svg{ width:26px; height:26px; color:var(--accent); margin-bottom:12px; }
+  .why-card h4{ font-size:15px; margin-bottom:6px; }
+  .why-card p{ font-size:13px; color:var(--ink-soft); }
+
+  /* ---------- Delivery / Order CTA ---------- */
+  .delivery-layout{ display:flex; align-items:center; justify-content:center; gap:44px; flex-wrap:wrap; }
+  .delivery-scene{
+    position:relative; width:240px; height:150px; overflow:hidden; flex:0 0 auto;
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg);
+  }
+  .scooter-svg-big{
     position:absolute; top:50%; left:0; width:130px; height:auto; color:var(--accent);
-    transform:translate(-140px, -50%); animation:scooterRide 9s linear infinite;
+    transform:translate(20px, -50%); animation:sceneRide 6s ease-in-out infinite;
   }
-  @keyframes scooterRide{
-    0%{ transform:translate(-140px, -50%); }
-    50%{ transform:translate(calc(50vw - 65px), calc(-50% - 5px)); }
-    100%{ transform:translate(calc(100vw + 140px), -50%); }
+  @keyframes sceneRide{
+    0%,100%{ transform:translate(15px, -50%); }
+    50%{ transform:translate(95px, calc(-50% - 6px)); }
   }
-  @media (prefers-reduced-motion: reduce){ .scooter-svg{ animation:none; left:calc(50% - 65px); } }
+  @media (prefers-reduced-motion: reduce){ .scooter-svg-big{ animation:none; } }
+  .delivery-ribbon{
+    writing-mode:vertical-rl; text-orientation:mixed; background:var(--accent); border-radius:999px;
+    padding:34px 16px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:26px; min-height:260px; flex:0 0 auto;
+  }
+  .ribbon-link{
+    color:var(--primary-ink); font-weight:800; letter-spacing:.18em; text-transform:uppercase;
+    text-decoration:none; font-size:14px; transition:transform .18s cubic-bezier(.25,1,.35,1);
+  }
+  .ribbon-link:hover{ transform:scale(1.06); }
+  html[lang="ar"] .ribbon-link{ letter-spacing:.03em; }
+  .ribbon-dot{ width:6px; height:6px; border-radius:50%; background:var(--primary-ink); opacity:.6; flex:0 0 auto; }
 
   /* ---------- Follow ---------- */
   .follow-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; max-width:640px; margin-inline:auto; }
@@ -365,26 +396,6 @@
 
   <div class="divider"><span class="divider-mark"></span></div>
 
-  <!-- ============ CONCEPT ============ -->
-  <section id="concept">
-    <div class="container concept-grid">
-      <div class="concept-visual" data-reveal><img src="img/brand-cups.jpg" alt="Savva Coffee" loading="lazy"></div>
-      <div class="concept-text" data-reveal>
-        <span class="eyebrow" data-i18n="conceptEyebrow"></span>
-        <h2 style="margin-top:10px;" data-i18n="conceptTitle"></h2>
-        <p style="margin-top:18px;" data-i18n="conceptP1"></p>
-        <p data-i18n="conceptP2"></p>
-        <div class="concept-chips">
-          <span class="concept-chip"><svg><use href="#i-trees"/></svg><span data-i18n="chipOutdoor"></span></span>
-          <span class="concept-chip"><svg><use href="#i-users"/></svg><span data-i18n="chipFamily"></span></span>
-          <span class="concept-chip"><svg><use href="#i-music"/></svg><span data-i18n="chipMusic"></span></span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"><span class="divider-mark"></span></div>
-
   <!-- ============ MENU ============ -->
   <section id="menu">
     <div class="container">
@@ -403,22 +414,89 @@
     </div>
   </section>
 
-  <!-- ============ DELIVERY STRIP ============ -->
-  <div class="scooter-track" aria-hidden="true">
-    <svg class="scooter-svg" viewBox="0 0 160 90" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="34" cy="68" r="13" fill="none" stroke="currentColor" stroke-width="3"/>
-      <circle cx="118" cy="68" r="13" fill="none" stroke="currentColor" stroke-width="3"/>
-      <circle cx="34" cy="68" r="4" fill="currentColor"/>
-      <circle cx="118" cy="68" r="4" fill="currentColor"/>
-      <path d="M34 68 L60 68 L78 44 L104 44 L118 68" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M78 44 L84 26" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
-      <path d="M75 25 L93 25" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
-      <circle cx="96" cy="30" r="8" fill="currentColor"/>
-      <path d="M96 38 Q86 50 78 46" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
-      <rect x="8" y="42" width="20" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="2.5"/>
-      <path d="M13 42 v-11 a4.5 4.5 0 0 1 9 0 v11" fill="none" stroke="currentColor" stroke-width="2.2"/>
-    </svg>
-  </div>
+  <div class="divider"><span class="divider-mark"></span></div>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="concept">
+    <div class="container concept-grid">
+      <div class="concept-visual" data-reveal><img src="img/brand-cups.jpg" alt="Savva Coffee" loading="lazy"></div>
+      <div class="concept-text" data-reveal>
+        <span class="eyebrow" data-i18n="conceptEyebrow"></span>
+        <h2 style="margin-top:10px;" data-i18n="conceptTitle"></h2>
+        <p style="margin-top:18px;" data-i18n="conceptP1"></p>
+        <p data-i18n="conceptP2"></p>
+        <div class="concept-chips">
+          <span class="concept-chip"><svg><use href="#i-trees"/></svg><span data-i18n="chipOutdoor"></span></span>
+          <span class="concept-chip"><svg><use href="#i-users"/></svg><span data-i18n="chipFamily"></span></span>
+          <span class="concept-chip"><svg><use href="#i-music"/></svg><span data-i18n="chipMusic"></span></span>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <h3 class="why-heading" data-reveal data-i18n="whyHeading"></h3>
+      <div class="why-grid">
+        <div class="why-card" data-reveal>
+          <svg><use href="#i-cup"/></svg>
+          <h4 data-i18n="why1Title"></h4><p data-i18n="why1Text"></p>
+        </div>
+        <div class="why-card" data-reveal>
+          <svg><use href="#i-trees"/></svg>
+          <h4 data-i18n="why2Title"></h4><p data-i18n="why2Text"></p>
+        </div>
+        <div class="why-card" data-reveal>
+          <svg><use href="#i-instagram"/></svg>
+          <h4 data-i18n="why3Title"></h4><p data-i18n="why3Text"></p>
+        </div>
+        <div class="why-card" data-reveal>
+          <svg><use href="#i-pin"/></svg>
+          <h4 data-i18n="why4Title"></h4><p data-i18n="why4Text"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><span class="divider-mark"></span></div>
+
+  <!-- ============ DELIVERY / ORDER CTA ============ -->
+  <section id="delivery">
+    <div class="container">
+      <div class="section-head center" data-reveal>
+        <span class="eyebrow" data-i18n="deliveryEyebrow"></span>
+        <h2 data-i18n="deliveryTitle"></h2>
+        <p data-i18n="deliveryLead"></p>
+      </div>
+      <div class="delivery-layout">
+        <div class="delivery-scene" data-reveal>
+          <svg class="scooter-svg-big" viewBox="0 0 160 90" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="34" cy="68" r="13" fill="none" stroke="currentColor" stroke-width="3"/>
+            <circle cx="118" cy="68" r="13" fill="none" stroke="currentColor" stroke-width="3"/>
+            <circle cx="34" cy="68" r="4" fill="currentColor"/>
+            <circle cx="118" cy="68" r="4" fill="currentColor"/>
+            <path d="M34 68 L60 68 L78 44 L104 44 L118 68" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M78 44 L84 26" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M75 25 L93 25" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+            <circle cx="96" cy="30" r="8" fill="currentColor"/>
+            <path d="M96 38 Q86 50 78 46" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+            <rect x="8" y="42" width="20" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="2.5"/>
+            <path d="M13 42 v-11 a4.5 4.5 0 0 1 9 0 v11" fill="none" stroke="currentColor" stroke-width="2.2"/>
+          </svg>
+        </div>
+        <div class="delivery-ribbon" data-reveal>
+          <a class="ribbon-link" href="https://www.instagram.com/savva_cafe" target="_blank" rel="noopener" data-i18n="navOrder"></a>
+          <span class="ribbon-dot"></span>
+          <a class="ribbon-link" href="#visit" data-i18n="navVisit"></a>
+        </div>
+        <div data-reveal>
+          <div class="visit-map">
+            <iframe
+              src="https://www.openstreetmap.org/export/embed.html?bbox=39.5751%2C24.4843%2C39.5951%2C24.5023&marker=24.4933%2C39.5851&layer=mapnik"
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Savva — Bir Uthman, Madinah"></iframe>
+          </div>
+          <p class="map-credit">© OpenStreetMap contributors — <span data-i18n="visitMapNote"></span></p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <div class="divider"><span class="divider-mark"></span></div>
 
@@ -448,14 +526,6 @@
         <h2 data-i18n="visitTitle"></h2>
       </div>
       <div class="visit-grid">
-        <div>
-          <div class="visit-map" data-reveal>
-            <iframe
-              src="https://www.openstreetmap.org/export/embed.html?bbox=39.5751%2C24.4843%2C39.5951%2C24.5023&marker=24.4933%2C39.5851&layer=mapnik"
-              loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Savva — Bir Uthman, Madinah"></iframe>
-          </div>
-          <p class="map-credit">© OpenStreetMap contributors — <span data-i18n="visitMapNote"></span></p>
-        </div>
         <div class="visit-card" data-reveal>
           <div class="visit-row">
             <svg><use href="#i-pin"/></svg>
@@ -536,6 +606,13 @@
       conceptP1:"Savva is a specialty coffee house in Madinah, built around slowing down — a cup made properly, a seat that isn't in a hurry to turn over, and a room that feels the same whether you're alone with a book or catching up with friends.",
       conceptP2:"The space holds both indoor and outdoor seating, welcomes families, and keeps a warm soundtrack running underneath it all.",
       chipOutdoor:"Indoor & Outdoor Seating", chipFamily:"Family Friendly", chipMusic:"Live Ambience",
+      whyHeading:"Why visitors choose Savva",
+      why1Title:"Real specialty coffee", why1Text:"Every drink made fresh — see the full range in our Menu above.",
+      why2Title:"A place to stay a while", why2Text:"Indoor and outdoor seating, family-friendly, with music running underneath it all.",
+      why3Title:"Real, not staged", why3Text:"Every photo on this page comes straight from our own Instagram — this is really us.",
+      why4Title:"Easy to find", why4Text:"Right in Bir Uthman, Madinah — see you there.",
+      deliveryEyebrow:"On the way", deliveryTitle:"Fresh to your table",
+      deliveryLead:"Order ahead or come find us — either way, Savva is close by.",
       menuEyebrow:"On the Menu", menuTitle:"A taste of Savva", menuLead:"A few favourites, straight from Savva's own Instagram.",
       menuTabCoffee:"Coffee", menuTabRefreshers:"Refreshers", menuTabDesserts:"Desserts",
       menuIcedHibiscus:"Ice Hibiscus", menuIcedHibiscusDesc:"Vibrant, lightly sweet-tart iced hibiscus — perfect for a hot day.",
@@ -573,6 +650,13 @@
       conceptP1:"سافا هو بيت قهوة مختصة في المدينة المنورة، يقوم على فكرة التمهّل — كوب يُحضّر بعناية، ومقعد لا يستعجلك، وأجواء تبقى كما هي سواء كنت وحدك مع كتاب أو مع أصدقاء.",
       conceptP2:"يضم المكان جلسات داخلية وخارجية، ويرحب بالعائلات، مع موسيقى هادئة ترافق الأجواء.",
       chipOutdoor:"جلسات داخلية وخارجية", chipFamily:"مناسب للعائلات", chipMusic:"أجواء موسيقية",
+      whyHeading:"لماذا يختار زوارنا سافا",
+      why1Title:"قهوة مختصة حقيقية", why1Text:"كل مشروب يُحضّر طازجًا — شاهد القائمة كاملة في الأعلى.",
+      why2Title:"مكان يستحق البقاء فيه", why2Text:"جلسات داخلية وخارجية، مناسبة للعائلات، مع موسيقى هادئة ترافق الأجواء.",
+      why3Title:"حقيقي وليس مُجمّلاً", why3Text:"كل صورة في هذه الصفحة من حسابنا الحقيقي على إنستغرام — هذا نحن فعلاً.",
+      why4Title:"سهل الوصول إليه", why4Text:"في قلب حي بئر عثمان بالمدينة المنورة — بانتظاركم.",
+      deliveryEyebrow:"في الطريق إليكم", deliveryTitle:"طازج حتى طاولتكم",
+      deliveryLead:"اطلبوا مسبقًا أو تعالوا بأنفسكم — سافا قريب منكم دائمًا.",
       menuEyebrow:"القائمة", menuTitle:"مذاق سافا", menuLead:"أشهر الأصناف، مباشرة من إنستغرام سافا.",
       menuTabCoffee:"القهوة", menuTabRefreshers:"المشروبات المنعشة", menuTabDesserts:"الحلويات",
       menuIcedHibiscus:"كركديه مثلج", menuIcedHibiscusDesc:"كركديه بارد بلون أحمر زاهٍ ومذاق حلو خفيف — مثالي في الأيام الحارة.",
