@@ -6,36 +6,36 @@
 <title>Savva — Specialty Coffee, Madinah</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Markazi+Text:wght@500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Baloo+Bhaijaan+2:wght@600;700;800&family=Inter:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#064E3B;
-    --surface:#0B5D45;
-    --surface-2:#123F32;
-    --ink:#F7F5EA;
-    --ink-soft:#B7CDBF;
+    --bg:#2A331E;
+    --surface:#333F24;
+    --surface-2:#3D4B2B;
+    --ink:#F2EFE3;
+    --ink-soft:#B7C0A4;
     --ink-heading:#F7F5EA;
     --line:rgba(247,245,234,.14);
-    --accent:#F7F5EA;
-    --accent-soft:#F7F5EA1c;
+    --accent:#8CA85D;
+    --accent-soft:#8CA85D22;
     --accent-copper:#A9673A;
-    --primary-ink:#064E3B;
+    --primary-ink:#1D2414;
     --shadow:0 20px 50px -14px rgba(0,0,0,.55);
     --shadow-sm:0 8px 22px -8px rgba(0,0,0,.45);
     --radius-lg:20px;
     --radius-md:14px;
     --radius-sm:9px;
-    --font-display:'Cormorant Garamond',serif;
+    --font-display:'Baloo 2',sans-serif;
     --font-body:'Inter',sans-serif;
     color-scheme:dark;
   }
-  html[lang="ar"]{ --font-display:'Markazi Text',serif; --font-body:'Tajawal',sans-serif; }
+  html[lang="ar"]{ --font-display:'Baloo Bhaijaan 2',sans-serif; --font-body:'Tajawal',sans-serif; }
   *{box-sizing:border-box;}
   body{
     margin:0; background:var(--bg); color:var(--ink); font-family:var(--font-body);
     line-height:1.6; font-size:16px; -webkit-font-smoothing:antialiased; overflow-x:hidden;
   }
-  h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; margin:0; color:var(--ink-heading); }
+  h1,h2,h3,h4{ font-family:var(--font-display); font-weight:700; margin:0; color:var(--ink-heading); }
   p{ margin:0; }
   a{ color:inherit; }
   button{ font-family:inherit; }
@@ -108,51 +108,39 @@
     background:radial-gradient(ellipse 60% 50% at 50% 30%, rgba(247,245,234,.07) 0%, transparent 70%);
   }
   .hero-inner{ position:relative; z-index:2; max-width:900px; margin-inline:auto; }
-  .hero-arabic{ font-family:'Markazi Text',serif; font-size:26px; color:var(--ink-soft); margin-bottom:10px; display:block; }
+  .hero-arabic{ font-family:'Baloo Bhaijaan 2',sans-serif; font-weight:700; font-size:24px; color:var(--ink-soft); margin-bottom:10px; display:block; }
   .hero h1{
     font-size:clamp(84px,19vw,240px); line-height:.92; letter-spacing:-.01em; margin-block:0 22px;
     color:var(--ink-heading); position:relative; z-index:2;
   }
-  .hero-lead{ font-size:18px; font-style:italic; color:var(--ink-soft); max-width:44ch; margin:0 auto 34px; font-family:var(--font-display); position:relative; z-index:2; }
+  .hero-lead{ font-size:18px; font-style:italic; color:var(--ink-soft); max-width:44ch; margin:0 auto 34px; font-family:var(--font-body); position:relative; z-index:2; }
   html[lang="ar"] .hero-lead{ font-style:normal; }
   .hero-actions{ display:flex; gap:14px; flex-wrap:wrap; justify-content:center; position:relative; z-index:2; }
 
-  /* ---------- Floating drink orbs ---------- */
+  /* ---------- Floating drink orbs (real photos) ---------- */
   .hero-orbs{ position:absolute; inset:0; z-index:1; pointer-events:none; }
   .drink-orb{
-    position:absolute; will-change:transform; filter:drop-shadow(0 22px 34px rgba(0,0,0,.4));
+    position:absolute; will-change:transform; border-radius:50%; overflow:hidden;
+    border:3px solid rgba(213,226,208,.55); box-shadow:0 22px 34px -10px rgba(0,0,0,.5);
     animation:orbFloat 10s ease-in-out infinite;
   }
-  .drink-orb .cup{
-    position:relative; width:100%; height:100%;
-    clip-path:polygon(16% 0%, 84% 0%, 76% 100%, 24% 100%);
-    background:var(--drink-grad);
-  }
-  .drink-orb .cup::after{
-    content:""; position:absolute; top:2%; bottom:6%; left:14%; width:16%;
-    background:linear-gradient(rgba(255,255,255,.4), rgba(255,255,255,0));
-    filter:blur(1.5px); border-radius:20px;
-  }
-  .drink-orb .rim{
-    position:absolute; top:-8%; left:9%; right:9%; height:16%; border-radius:50%;
-    background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.32);
-  }
-  .orb-latte{ --drink-grad:linear-gradient(160deg,#F3E0C4,#B98A54); top:9%; left:6%; width:118px; height:150px; z-index:1; opacity:.85; animation-duration:12s; }
-  .orb-berry{ --drink-grad:linear-gradient(160deg,#FF9AA6,#C6415A); top:10%; right:8%; width:140px; height:176px; z-index:3; animation-duration:9s; animation-delay:.6s; }
-  .orb-matcha{ --drink-grad:linear-gradient(160deg,#C7E4AE,#5C8A4A); bottom:24%; left:11%; width:104px; height:132px; z-index:1; opacity:.8; filter:blur(.4px) drop-shadow(0 18px 28px rgba(0,0,0,.35)); animation-duration:13s; animation-delay:1.4s; }
-  .orb-coldbrew{ --drink-grad:linear-gradient(160deg,#8C6A4A,#3D2A1C); bottom:8%; right:12%; width:160px; height:204px; z-index:3; animation-duration:11s; animation-delay:.3s; }
-  .orb-citrus{ --drink-grad:linear-gradient(160deg,#FFE59A,#F2A93C); top:44%; left:47%; width:84px; height:106px; z-index:3; animation-duration:8s; animation-delay:.9s; }
+  .drink-orb img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .orb-1{ top:8%; left:6%; width:124px; height:124px; z-index:1; opacity:.9; animation-duration:12s; }
+  .orb-2{ top:9%; right:7%; width:150px; height:150px; z-index:3; animation-duration:9s; animation-delay:.6s; }
+  .orb-3{ bottom:26%; left:10%; width:104px; height:104px; z-index:1; opacity:.85; animation-duration:13s; animation-delay:1.4s; }
+  .orb-4{ bottom:9%; right:11%; width:168px; height:168px; z-index:3; animation-duration:11s; animation-delay:.3s; }
+  .orb-5{ top:45%; left:47%; width:88px; height:88px; z-index:3; animation-duration:8s; animation-delay:.9s; }
   @keyframes orbFloat{
     0%{ transform:translate(var(--px,0px),var(--py,0px)) translateY(0) rotate(-4deg); }
     50%{ transform:translate(var(--px,0px),var(--py,0px)) translateY(-22px) rotate(3deg); }
     100%{ transform:translate(var(--px,0px),var(--py,0px)) translateY(0) rotate(-4deg); }
   }
   @media (max-width:760px){
-    .orb-latte{ width:74px; height:94px; } .orb-berry{ width:86px; height:108px; }
-    .orb-matcha{ width:64px; height:82px; } .orb-coldbrew{ width:98px; height:126px; }
-    .orb-citrus{ width:52px; height:66px; }
+    .orb-1{ width:80px; height:80px; } .orb-2{ width:96px; height:96px; }
+    .orb-3{ width:66px; height:66px; } .orb-4{ width:104px; height:104px; }
+    .orb-5{ width:56px; height:56px; }
   }
-  @media (max-width:520px){ .orb-matcha, .orb-citrus{ display:none; } }
+  @media (max-width:520px){ .orb-3, .orb-5{ display:none; } }
 
   /* ---------- Floating glass product card ---------- */
   .hero-float-card{
@@ -166,9 +154,8 @@
     width:64px !important; height:64px !important; border-radius:14px; flex:0 0 auto; overflow:hidden;
     position:relative !important; top:auto !important; left:auto !important; right:auto !important; bottom:auto !important;
     z-index:auto !important; animation:none !important; filter:none !important; opacity:1 !important;
+    border:1px solid var(--menu-border, #D5E2D0) !important; box-shadow:none !important;
   }
-  .hero-float-media .cup{ clip-path:none; border-radius:14px; }
-  .hero-float-media .rim{ display:none; }
   .hero-float-info{ text-align:start; min-width:0; }
   .hero-float-info h4{ font-family:var(--font-body); font-size:14.5px; font-weight:700; color:var(--ink-heading); margin-bottom:2px; }
   .hero-float-info p{ font-size:12px; color:var(--ink-soft); margin-bottom:8px; }
@@ -209,14 +196,10 @@
   }
   .concept-chip svg{ width:15px; height:15px; color:var(--accent); }
   .concept-visual{
-    aspect-ratio:1/1; border-radius:var(--radius-lg); background:radial-gradient(circle at 30% 30%, var(--surface-2), var(--bg));
-    border:1px solid var(--line); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;
+    aspect-ratio:1/1; border-radius:var(--radius-lg); border:1px solid var(--line);
+    overflow:hidden; position:relative;
   }
-  .concept-visual svg{ width:30%; height:30%; color:var(--accent); opacity:.85; }
-  .concept-visual::after{
-    content:""; position:absolute; inset:0; border-radius:inherit;
-    background:radial-gradient(circle, rgba(198,161,91,.25) 0.5px, transparent 0.5px); background-size:14px 14px; opacity:.5;
-  }
+  .concept-visual img{ width:100%; height:100%; object-fit:cover; }
 
   /* ---------- Menu ---------- */
   /* ---------- Menu: white "island" section with light-green-outlined cards ---------- */
@@ -245,10 +228,10 @@
   }
   .drink-card:hover{ transform:translateY(-5px); box-shadow:0 16px 34px -18px rgba(94,127,82,.35); }
   .drink-icon{
-    width:128px; height:128px; border-radius:50%; margin-bottom:26px;
+    width:150px; height:150px; border-radius:50%; margin-bottom:26px; overflow:hidden;
     background:#F4F7F1; display:flex; align-items:center; justify-content:center;
   }
-  .drink-icon svg{ width:52px; height:52px; color:var(--menu-accent); }
+  .drink-icon img{ width:100%; height:100%; object-fit:cover; }
   .drink-card h4{ font-family:var(--font-body); font-size:20px; font-weight:700; margin-bottom:8px; color:var(--menu-ink); }
   .drink-card p{ font-size:13.5px; color:var(--menu-ink-soft); margin-bottom:22px; }
   .drink-btn{
@@ -375,11 +358,11 @@
     <canvas id="heroCanvas" aria-hidden="true"></canvas>
     <div class="hero-glow" aria-hidden="true"></div>
     <div class="hero-orbs" id="heroOrbs" aria-hidden="true">
-      <div class="drink-orb orb-latte" data-depth="0.4"><span class="rim"></span><span class="cup"></span></div>
-      <div class="drink-orb orb-berry" data-depth="1"><span class="rim"></span><span class="cup"></span></div>
-      <div class="drink-orb orb-matcha" data-depth="0.4"><span class="rim"></span><span class="cup"></span></div>
-      <div class="drink-orb orb-coldbrew" data-depth="1.1"><span class="rim"></span><span class="cup"></span></div>
-      <div class="drink-orb orb-citrus" data-depth="1.3"><span class="rim"></span><span class="cup"></span></div>
+      <div class="drink-orb orb-1" data-depth="0.4"><img src="img/ice-hibiscus.jpg" alt="" loading="lazy"></div>
+      <div class="drink-orb orb-2" data-depth="1"><img src="img/matcha-berry.jpg" alt="" loading="lazy"></div>
+      <div class="drink-orb orb-3" data-depth="0.4"><img src="img/freddo.jpg" alt="" loading="lazy"></div>
+      <div class="drink-orb orb-4" data-depth="1.1"><img src="img/blueberry-cheesecake.jpg" alt="" loading="lazy"></div>
+      <div class="drink-orb orb-5" data-depth="1.3"><img src="img/kunafa.jpg" alt="" loading="lazy"></div>
     </div>
     <div class="container hero-inner">
       <span class="hero-arabic">سافا</span>
@@ -393,10 +376,10 @@
       </div>
     </div>
     <a class="hero-float-card" href="#menu">
-      <span class="hero-float-media drink-orb orb-berry"><span class="rim"></span><span class="cup"></span></span>
+      <span class="hero-float-media"><img src="img/ice-hibiscus.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></span>
       <span class="hero-float-info">
-        <h4 data-i18n="drinkIcedMacchiato"></h4>
-        <p data-i18n="drinkIcedMacchiatoDesc"></p>
+        <h4 data-i18n="menuIcedHibiscus"></h4>
+        <p data-i18n="menuIcedHibiscusDesc"></p>
         <span class="hero-float-row">
           <span class="hero-float-note" data-i18n="heroFloatNote"></span>
           <span class="hero-float-cta" data-i18n="heroFloatCta"></span>
@@ -410,7 +393,7 @@
   <!-- ============ CONCEPT ============ -->
   <section id="concept">
     <div class="container concept-grid">
-      <div class="concept-visual" data-reveal><svg><use href="#i-cup"/></svg></div>
+      <div class="concept-visual" data-reveal><img src="img/brand-cups.jpg" alt="Savva Coffee" loading="lazy"></div>
       <div class="concept-text" data-reveal>
         <span class="eyebrow" data-i18n="conceptEyebrow"></span>
         <h2 style="margin-top:10px;" data-i18n="conceptTitle"></h2>
@@ -436,15 +419,10 @@
         <p data-i18n="menuLead"></p>
       </div>
       <div class="menu-tabs" id="menuTabs" data-reveal>
-        <button class="menu-tab" data-cat="coffee" aria-pressed="true" data-i18n="menuCoffeeTitle"></button>
-        <button class="menu-tab" data-cat="cold" aria-pressed="false" data-i18n="menuColdTitle"></button>
-        <button class="menu-tab" data-cat="fresh" aria-pressed="false" data-i18n="menuJuiceTitle"></button>
+        <button class="menu-tab" data-cat="drink" aria-pressed="true" data-i18n="menuTabDrinks"></button>
+        <button class="menu-tab" data-cat="dessert" aria-pressed="false" data-i18n="menuTabDesserts"></button>
       </div>
       <div class="drink-grid" id="drinkGrid"></div>
-      <div class="menu-food-note" data-reveal>
-        <svg><use href="#i-users"/></svg>
-        <span><b data-i18n="menuFoodTitle"></b> — <span data-i18n="menuFoodDesc"></span></span>
-      </div>
       <p class="menu-note" data-reveal data-i18n="menuNote"></p>
     </div>
   </section>
@@ -555,20 +533,17 @@
       conceptP1:"Savva is a specialty coffee house in Madinah, built around slowing down — a cup made properly, a seat that isn't in a hurry to turn over, and a room that feels the same whether you're alone with a book or catching up with friends.",
       conceptP2:"The space holds both indoor and outdoor seating, welcomes families, and keeps a warm soundtrack running underneath it all.",
       chipOutdoor:"Indoor & Outdoor Seating", chipFamily:"Family Friendly", chipMusic:"Live Ambience",
-      menuEyebrow:"On the Menu", menuTitle:"A taste of Savva", menuLead:"A focused menu built around specialty coffee, fresh juices, and simple food done well.",
-      menuCoffeeTitle:"Coffee", menuColdTitle:"Cold & Iced", menuJuiceTitle:"Smoothies & Juices",
-      menuFoodTitle:"Sandwiches", menuFoodDesc:"Club sandwiches and simple bites to go with your cup.",
-      drinkEspresso:"Espresso", drinkEspressoDesc:"Pulled short and strong — the base for everything else.",
-      drinkAmericano:"Americano", drinkAmericanoDesc:"Espresso, stretched with hot water.",
-      drinkCappuccino:"Cappuccino", drinkCappuccinoDesc:"Equal parts espresso, steamed milk and foam.",
-      drinkFlatWhite:"Flat White", drinkFlatWhiteDesc:"A silkier, milk-forward pour over a double shot.",
-      drinkSpanishLatte:"Spanish Latte", drinkSpanishLatteDesc:"Espresso with condensed milk — sweet and rich.",
-      drinkIcedLatte:"Iced Latte", drinkIcedLatteDesc:"Espresso over ice with cold milk.",
-      drinkColdBrew:"Cold Brew", drinkColdBrewDesc:"Steeped slow and cold for a smoother cup.",
-      drinkIcedMacchiato:"Iced Caramel Macchiato", drinkIcedMacchiatoDesc:"Vanilla, milk, espresso, and a caramel finish.",
-      drinkMangoSmoothie:"Mango Smoothie", drinkMangoSmoothieDesc:"Blended fresh, thick and naturally sweet.",
-      drinkBerrySmoothie:"Mixed Berry Smoothie", drinkBerrySmoothieDesc:"A bright, fruity blend, chilled and smooth.",
-      drinkOrangeJuice:"Fresh Orange Juice", drinkOrangeJuiceDesc:"Simple, cold-pressed, and honest.",
+      menuEyebrow:"On the Menu", menuTitle:"A taste of Savva", menuLead:"A few favourites, straight from Savva's own Instagram.",
+      menuTabDrinks:"Drinks", menuTabDesserts:"Desserts",
+      menuIcedHibiscus:"Ice Hibiscus", menuIcedHibiscusDesc:"Vibrant, lightly sweet-tart iced hibiscus — perfect for a hot day.",
+      menuMatchaBerry:"Matcha Berry", menuMatchaBerryDesc:"Earthy matcha layered over a bright berry base.",
+      menuMelon:"Melon", menuMelonDesc:"Cool, blended cantaloupe — a taste of summer.",
+      menuFreddo:"Freddo", menuFreddoDesc:"Whipped iced coffee, rich and smooth over ice.",
+      menuBlueberryCheesecake:"Blueberry Cheesecake", menuBlueberryCheesecakeDesc:"Rich and creamy cheesecake topped with luscious, juicy blueberries.",
+      menuCinnabonDanish:"Cinnabon Danish", menuCinnabonDanishDesc:"A unique and distinctive flavor, with the rich taste of nuts.",
+      menuMadiniCookies:"Madini Cookies", menuMadiniCookiesDesc:"A unique and distinctive flavor, with the rich taste of nuts.",
+      menuChocCake:"Chocolate Caramel Cake", menuChocCakeDesc:"Layers of dark chocolate cake with a silky caramel cream.",
+      menuKunafa:"Kunafa", menuKunafaDesc:"Traditional kunafa, warm and syrup-soaked.",
       drinkCta:"See on Instagram",
       heroFloatNote:"Ask in-café for pricing", heroFloatCta:"View Menu",
       menuNote:"Full menu and current prices are available in-café and on Instagram.",
@@ -593,20 +568,17 @@
       conceptP1:"سافا هو بيت قهوة مختصة في المدينة المنورة، يقوم على فكرة التمهّل — كوب يُحضّر بعناية، ومقعد لا يستعجلك، وأجواء تبقى كما هي سواء كنت وحدك مع كتاب أو مع أصدقاء.",
       conceptP2:"يضم المكان جلسات داخلية وخارجية، ويرحب بالعائلات، مع موسيقى هادئة ترافق الأجواء.",
       chipOutdoor:"جلسات داخلية وخارجية", chipFamily:"مناسب للعائلات", chipMusic:"أجواء موسيقية",
-      menuEyebrow:"القائمة", menuTitle:"مذاق سافا", menuLead:"قائمة مركّزة حول القهوة المختصة، والعصائر الطازجة، وأطباق بسيطة متقنة.",
-      menuCoffeeTitle:"القهوة", menuColdTitle:"مشروبات باردة", menuJuiceTitle:"سموذي وعصائر",
-      menuFoodTitle:"ساندويتشات", menuFoodDesc:"ساندويتشات كلوب وأطباق بسيطة تناسب كوبك.",
-      drinkEspresso:"إسبريسو", drinkEspressoDesc:"جرعة مركّزة وقصيرة — أساس كل ما يليها.",
-      drinkAmericano:"أمريكانو", drinkAmericanoDesc:"إسبريسو ممدد بالماء الساخن.",
-      drinkCappuccino:"كابتشينو", drinkCappuccinoDesc:"أجزاء متساوية من الإسبريسو والحليب المبخّر والرغوة.",
-      drinkFlatWhite:"فلات وايت", drinkFlatWhiteDesc:"قهوة حريرية بحليب أنعم فوق جرعة مزدوجة.",
-      drinkSpanishLatte:"لاتيه إسباني", drinkSpanishLatteDesc:"إسبريسو مع الحليب المكثف — حلو وغني.",
-      drinkIcedLatte:"آيس لاتيه", drinkIcedLatteDesc:"إسبريسو مع الثلج وحليب بارد.",
-      drinkColdBrew:"كولد برو", drinkColdBrewDesc:"تحضير بارد وبطيء لمذاق أنعم.",
-      drinkIcedMacchiato:"آيس كراميل ماكياتو", drinkIcedMacchiatoDesc:"فانيليا وحليب وإسبريسو بلمسة كراميل.",
-      drinkMangoSmoothie:"سموذي المانجو", drinkMangoSmoothieDesc:"مخفوق طازج، كثيف وحلو طبيعيًا.",
-      drinkBerrySmoothie:"سموذي التوت المشكل", drinkBerrySmoothieDesc:"مزيج فواكه منعش وبارد.",
-      drinkOrangeJuice:"عصير برتقال طازج", drinkOrangeJuiceDesc:"بسيط، طازج، وبلا تعقيد.",
+      menuEyebrow:"القائمة", menuTitle:"مذاق سافا", menuLead:"أشهر الأصناف، مباشرة من إنستغرام سافا.",
+      menuTabDrinks:"المشروبات", menuTabDesserts:"الحلويات",
+      menuIcedHibiscus:"كركديه مثلج", menuIcedHibiscusDesc:"كركديه بارد بلون أحمر زاهٍ ومذاق حلو خفيف — مثالي في الأيام الحارة.",
+      menuMatchaBerry:"ماتشا بيري", menuMatchaBerryDesc:"ماتشا ترابية النكهة فوق قاعدة من التوت المنعش.",
+      menuMelon:"شمام", menuMelonDesc:"شمام مثلج ومخفوق — طعم الصيف في كل رشفة.",
+      menuFreddo:"فريدو", menuFreddoDesc:"قهوة مخفوقة مثلجة، غنية وناعمة فوق الثلج.",
+      menuBlueberryCheesecake:"تشيز كيك بلوبيري", menuBlueberryCheesecakeDesc:"تشيز كيك غني وكريمي مع حبات البلوبيري الطازجة.",
+      menuCinnabonDanish:"دانيش سينابون", menuCinnabonDanishDesc:"طعم مختلف ومميز مضاف إليه المكسرات.",
+      menuMadiniCookies:"كوكيز مديني", menuMadiniCookiesDesc:"طعم مختلف ومميز بنكهة المكسرات الغنية.",
+      menuChocCake:"كيك الشوكولاتة بالكراميل", menuChocCakeDesc:"طبقات من كيك الشوكولاتة الغامقة مع كريمة كراميل ناعمة.",
+      menuKunafa:"كنافة", menuKunafaDesc:"كنافة تقليدية دافئة ومغموسة بالقطر.",
       drinkCta:"عرض على إنستغرام",
       heroFloatNote:"السعر متوفر في المقهى", heroFloatCta:"عرض القائمة",
       menuNote:"القائمة الكاملة والأسعار الحالية متوفرة داخل المقهى وعلى إنستغرام.",
@@ -625,22 +597,21 @@
     }
   };
 
-  // Generic, universally-safe drink names for a specialty coffee house —
-  // no fabricated Savva-specific items or prices (none were confirmed).
-  var DRINKS = [
-    { cat:"coffee", tint:"amber", icon:"i-cup", nameKey:"drinkEspresso", descKey:"drinkEspressoDesc" },
-    { cat:"coffee", tint:"amber", icon:"i-cup", nameKey:"drinkAmericano", descKey:"drinkAmericanoDesc" },
-    { cat:"coffee", tint:"amber", icon:"i-cup", nameKey:"drinkCappuccino", descKey:"drinkCappuccinoDesc" },
-    { cat:"coffee", tint:"amber", icon:"i-cup", nameKey:"drinkFlatWhite", descKey:"drinkFlatWhiteDesc" },
-    { cat:"coffee", tint:"amber", icon:"i-cup", nameKey:"drinkSpanishLatte", descKey:"drinkSpanishLatteDesc" },
-    { cat:"cold", tint:"mint", icon:"i-cup", nameKey:"drinkIcedLatte", descKey:"drinkIcedLatteDesc" },
-    { cat:"cold", tint:"mint", icon:"i-cup", nameKey:"drinkColdBrew", descKey:"drinkColdBrewDesc" },
-    { cat:"cold", tint:"mint", icon:"i-cup", nameKey:"drinkIcedMacchiato", descKey:"drinkIcedMacchiatoDesc" },
-    { cat:"fresh", tint:"coral", icon:"i-leaf", nameKey:"drinkMangoSmoothie", descKey:"drinkMangoSmoothieDesc" },
-    { cat:"fresh", tint:"coral", icon:"i-leaf", nameKey:"drinkBerrySmoothie", descKey:"drinkBerrySmoothieDesc" },
-    { cat:"fresh", tint:"coral", icon:"i-leaf", nameKey:"drinkOrangeJuice", descKey:"drinkOrangeJuiceDesc" }
+  // Real Savva items — names/photos/descriptions pulled from the café's
+  // own Instagram posts and highlights (see README). No prices anywhere
+  // were ever posted, so none are shown — never invented.
+  var MENU_ITEMS = [
+    { cat:"drink", img:"img/ice-hibiscus.jpg", nameKey:"menuIcedHibiscus", descKey:"menuIcedHibiscusDesc" },
+    { cat:"drink", img:"img/matcha-berry.jpg", nameKey:"menuMatchaBerry", descKey:"menuMatchaBerryDesc" },
+    { cat:"drink", img:"img/melon.jpg", nameKey:"menuMelon", descKey:"menuMelonDesc" },
+    { cat:"drink", img:"img/freddo.jpg", nameKey:"menuFreddo", descKey:"menuFreddoDesc" },
+    { cat:"dessert", img:"img/blueberry-cheesecake.jpg", nameKey:"menuBlueberryCheesecake", descKey:"menuBlueberryCheesecakeDesc" },
+    { cat:"dessert", img:"img/cinnabon-danish.jpg", nameKey:"menuCinnabonDanish", descKey:"menuCinnabonDanishDesc" },
+    { cat:"dessert", img:"img/madini-cookies.jpg", nameKey:"menuMadiniCookies", descKey:"menuMadiniCookiesDesc" },
+    { cat:"dessert", img:"img/chocolate-caramel-cake.jpg", nameKey:"menuChocCake", descKey:"menuChocCakeDesc" },
+    { cat:"dessert", img:"img/kunafa.jpg", nameKey:"menuKunafa", descKey:"menuKunafaDesc" }
   ];
-  var activeMenuCat = "coffee";
+  var activeMenuCat = "drink";
 
   var state = { lang:"en" };
   try{
@@ -685,9 +656,9 @@
      ===================================================== */
   function renderDrinks(){
     var wrap = document.getElementById("drinkGrid");
-    var html = DRINKS.filter(function(d){ return d.cat === activeMenuCat; }).map(function(d){
+    var html = MENU_ITEMS.filter(function(d){ return d.cat === activeMenuCat; }).map(function(d){
       return '<div class="drink-card">' +
-        '<div class="drink-icon"><svg><use href="#' + d.icon + '"/></svg></div>' +
+        '<div class="drink-icon"><img src="' + d.img + '" alt="" loading="lazy"></div>' +
         '<h4>' + t(d.nameKey) + '</h4><p>' + t(d.descKey) + '</p>' +
         '<a class="drink-btn" href="https://www.instagram.com/savva_cafe" target="_blank" rel="noopener">' + t("drinkCta") + '</a>' +
         '</div>';
