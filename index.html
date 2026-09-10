@@ -143,43 +143,54 @@
   }
 
   /* ---------- Menu ---------- */
-  /* ---------- Menu: tabbed drink board (Shake-Shack-style bold cards) ---------- */
-  .menu-tabs{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:30px; }
+  /* ---------- Menu: white "island" section with light-green-outlined cards ---------- */
+  #menu{
+    background:#FFFFFF; border-radius:32px; margin-inline:12px; padding-inline:20px;
+    --menu-border:#D5E2D0; --menu-accent:#5E7F52; --menu-ink:#111111; --menu-ink-soft:#7C8A76;
+  }
+  #menu .eyebrow{ color:var(--menu-accent); }
+  #menu .section-head h2{ color:var(--menu-ink); }
+  #menu .section-head p{ color:var(--menu-ink-soft); }
+  .menu-tabs{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:36px; }
   .menu-tab{
-    padding:11px 22px; border-radius:999px; border:1px solid var(--line); background:var(--surface);
-    color:var(--ink-soft); font-size:13.5px; font-weight:700; cursor:pointer;
+    padding:11px 22px; border-radius:999px; border:1px solid var(--menu-border); background:#FFFFFF;
+    color:var(--menu-ink-soft); font-size:13.5px; font-weight:700; cursor:pointer;
     transition:transform .18s cubic-bezier(.25,1,.35,1), background .18s ease, color .18s ease, border-color .18s ease;
   }
-  .menu-tab[aria-pressed="true"]{ background:var(--accent); color:var(--primary-ink); border-color:var(--accent); transform:scale(1.06); }
+  .menu-tab[aria-pressed="true"]{ background:var(--menu-accent); color:#FFFFFF; border-color:var(--menu-accent); transform:scale(1.06); }
   .menu-tab:active{ transform:scale(1.1); }
-  .drink-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:18px; }
+  .drink-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:32px; }
+  @media (max-width:900px){ .drink-grid{ grid-template-columns:repeat(2,1fr); gap:24px; } }
+  @media (max-width:520px){ .drink-grid{ grid-template-columns:1fr; } }
   .drink-card{
-    border-radius:var(--radius-lg); padding:26px 22px; position:relative; overflow:hidden; border:1px solid var(--line);
-    background:var(--surface); transition:transform .22s cubic-bezier(.25,1,.35,1);
+    border-radius:20px; padding:36px 26px 30px; border:1px solid var(--menu-border); background:#FFFFFF;
+    text-align:center; transition:transform .22s cubic-bezier(.25,1,.35,1), box-shadow .22s ease;
+    display:flex; flex-direction:column; align-items:center;
   }
-  .drink-card:hover{ transform:translateY(-5px); }
-  .drink-card::before{
-    content:""; position:absolute; inset:0; opacity:.22; z-index:0;
-    background:radial-gradient(circle at 25% 15%, var(--tint), transparent 65%);
-  }
-  .drink-card.tint-amber{ --tint:#E3A857; }
-  .drink-card.tint-mint{ --tint:#7FBF9E; }
-  .drink-card.tint-coral{ --tint:#E17B5F; }
+  .drink-card:hover{ transform:translateY(-5px); box-shadow:0 16px 34px -18px rgba(94,127,82,.35); }
   .drink-icon{
-    position:relative; z-index:1; width:44px; height:44px; border-radius:50%; margin-bottom:14px;
-    background:var(--tint); color:var(--bg); display:flex; align-items:center; justify-content:center;
+    width:128px; height:128px; border-radius:50%; margin-bottom:26px;
+    background:#F4F7F1; display:flex; align-items:center; justify-content:center;
   }
-  .drink-icon svg{ width:22px; height:22px; }
-  .drink-card h4{ position:relative; z-index:1; font-family:var(--font-display); font-size:21px; font-weight:600; margin-bottom:6px; color:var(--ink-heading); }
-  .drink-card p{ position:relative; z-index:1; font-size:13.5px; color:var(--ink-soft); }
+  .drink-icon svg{ width:52px; height:52px; color:var(--menu-accent); }
+  .drink-card h4{ font-family:var(--font-body); font-size:20px; font-weight:700; margin-bottom:8px; color:var(--menu-ink); }
+  .drink-card p{ font-size:13.5px; color:var(--menu-ink-soft); margin-bottom:22px; }
+  .drink-btn{
+    display:inline-flex; align-items:center; justify-content:center; margin-top:auto; text-decoration:none;
+    padding:10px 22px; border-radius:999px; border:1px solid var(--menu-border); background:transparent;
+    color:var(--menu-accent); font-size:12.5px; font-weight:700; letter-spacing:.02em;
+    transition:transform .18s cubic-bezier(.25,1,.35,1), background .18s ease;
+  }
+  .drink-btn:hover{ background:#F4F7F1; }
+  .drink-btn:active{ transform:scale(1.06); }
   .menu-food-note{
-    display:flex; align-items:center; justify-content:center; gap:10px; margin-top:34px; padding-top:26px;
-    border-top:1px solid var(--line); font-size:14px; color:var(--ink-soft); flex-wrap:wrap; text-align:center;
+    display:flex; align-items:center; justify-content:center; gap:10px; margin-top:40px; padding-top:28px;
+    border-top:1px solid var(--menu-border); font-size:14px; color:var(--menu-ink-soft); flex-wrap:wrap; text-align:center;
   }
-  .menu-food-note svg{ width:18px; height:18px; color:var(--accent); flex:0 0 auto; }
-  .menu-food-note b{ color:var(--ink-heading); }
+  .menu-food-note svg{ width:18px; height:18px; color:var(--menu-accent); flex:0 0 auto; }
+  .menu-food-note b{ color:var(--menu-ink); }
   .menu-note{
-    text-align:center; margin-top:22px; font-size:13.5px; color:var(--ink-soft); font-style:italic;
+    text-align:center; margin-top:22px; font-size:13.5px; color:var(--menu-ink-soft); font-style:italic;
   }
   html[lang="ar"] .menu-note{ font-style:normal; }
 
@@ -464,6 +475,7 @@
       drinkMangoSmoothie:"Mango Smoothie", drinkMangoSmoothieDesc:"Blended fresh, thick and naturally sweet.",
       drinkBerrySmoothie:"Mixed Berry Smoothie", drinkBerrySmoothieDesc:"A bright, fruity blend, chilled and smooth.",
       drinkOrangeJuice:"Fresh Orange Juice", drinkOrangeJuiceDesc:"Simple, cold-pressed, and honest.",
+      drinkCta:"See on Instagram",
       menuNote:"Full menu and current prices are available in-café and on Instagram.",
       moodEyebrow:"The Atmosphere", moodTitle:"Where evenings slow down", moodLead:"No two visits to Savva feel quite the same — the atmosphere shifts gently through the day.",
       moodGolden:"Golden Hour", moodTerrace:"Outdoor Terrace", moodNight:"Late Night",
@@ -500,6 +512,7 @@
       drinkMangoSmoothie:"سموذي المانجو", drinkMangoSmoothieDesc:"مخفوق طازج، كثيف وحلو طبيعيًا.",
       drinkBerrySmoothie:"سموذي التوت المشكل", drinkBerrySmoothieDesc:"مزيج فواكه منعش وبارد.",
       drinkOrangeJuice:"عصير برتقال طازج", drinkOrangeJuiceDesc:"بسيط، طازج، وبلا تعقيد.",
+      drinkCta:"عرض على إنستغرام",
       menuNote:"القائمة الكاملة والأسعار الحالية متوفرة داخل المقهى وعلى إنستغرام.",
       moodEyebrow:"الأجواء", moodTitle:"حيث تتمهّل الأمسيات", moodLead:"لا تشبه زيارة سافا الأخرى — تتبدّل الأجواء بلطف مع ساعات اليوم.",
       moodGolden:"الساعة الذهبية", moodTerrace:"التراس الخارجي", moodNight:"سهرة متأخرة",
@@ -577,9 +590,10 @@
   function renderDrinks(){
     var wrap = document.getElementById("drinkGrid");
     var html = DRINKS.filter(function(d){ return d.cat === activeMenuCat; }).map(function(d){
-      return '<div class="drink-card tint-' + d.tint + '">' +
+      return '<div class="drink-card">' +
         '<div class="drink-icon"><svg><use href="#' + d.icon + '"/></svg></div>' +
         '<h4>' + t(d.nameKey) + '</h4><p>' + t(d.descKey) + '</p>' +
+        '<a class="drink-btn" href="https://www.instagram.com/savva_cafe" target="_blank" rel="noopener">' + t("drinkCta") + '</a>' +
         '</div>';
     }).join('');
     wrap.innerHTML = html;
