@@ -78,6 +78,8 @@
   nav.main-nav a:hover{ color:var(--ink-heading); }
   @media (max-width:900px){ nav.main-nav{ display:none; } }
   .header-actions{ display:flex; align-items:center; gap:12px; }
+  .order-now-btn{ padding:10px 20px; font-size:13px; }
+  @media (max-width:420px){ .order-now-btn{ padding:9px 14px; font-size:12px; } }
   .lang-switch{ display:flex; gap:2px; padding:3px; border-radius:999px; border:1px solid var(--line); background:var(--surface); }
   .lang-switch button{
     font-size:11px; font-weight:700; letter-spacing:.03em; padding:7px 12px; border-radius:999px; border:none;
@@ -240,9 +242,17 @@
   @media (prefers-reduced-motion: reduce){ .mood-bg{ animation:none; } }
 
   /* ---------- Visit ---------- */
+  .visit-grid{ display:flex; align-items:center; justify-content:center; gap:44px; flex-wrap:wrap; }
+  .visit-map{
+    width:280px; height:280px; border-radius:50%; overflow:hidden; flex:0 0 auto;
+    border:4px solid var(--surface-2); box-shadow:var(--shadow-sm); position:relative;
+  }
+  .visit-map iframe{ position:absolute; inset:-8%; width:116%; height:116%; border:0; }
+  @media (max-width:540px){ .visit-map{ width:220px; height:220px; } }
+  .map-credit{ text-align:center; font-size:12px; color:var(--ink-soft); margin-top:10px; max-width:280px; }
   .visit-card{
     background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:40px;
-    max-width:640px; margin-inline:auto; text-align:center; box-shadow:var(--shadow-sm);
+    max-width:420px; text-align:center; box-shadow:var(--shadow-sm);
   }
   .visit-row{ display:flex; align-items:flex-start; gap:14px; justify-content:center; margin-bottom:18px; text-align:start; max-width:420px; margin-inline:auto; }
   .visit-row svg{ width:20px; height:20px; color:var(--accent); flex:0 0 auto; margin-top:2px; }
@@ -250,6 +260,19 @@
   .visit-row span{ font-size:13.5px; color:var(--ink-soft); }
   .visit-note{ font-size:12px; color:var(--ink-soft); font-style:italic; margin-top:6px; }
   html[lang="ar"] .visit-note{ font-style:normal; }
+
+  /* ---------- Delivery scooter strip ---------- */
+  .scooter-track{ position:relative; height:110px; overflow:hidden; background:var(--surface); }
+  .scooter-svg{
+    position:absolute; top:50%; left:0; width:130px; height:auto; color:var(--accent);
+    transform:translate(-140px, -50%); animation:scooterRide 9s linear infinite;
+  }
+  @keyframes scooterRide{
+    0%{ transform:translate(-140px, -50%); }
+    50%{ transform:translate(calc(50vw - 65px), calc(-50% - 5px)); }
+    100%{ transform:translate(calc(100vw + 140px), -50%); }
+  }
+  @media (prefers-reduced-motion: reduce){ .scooter-svg{ animation:none; left:calc(50% - 65px); } }
 
   /* ---------- Follow ---------- */
   .follow-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; max-width:640px; margin-inline:auto; }
@@ -300,26 +323,25 @@
       <span class="brand-name">Savva</span>
     </a>
     <nav class="main-nav" id="mainNav">
-      <a href="#concept" data-i18n="navConcept"></a>
+      <a href="#top" data-i18n="navHome"></a>
       <a href="#menu" data-i18n="navMenu"></a>
-      <a href="#atmosphere" data-i18n="navAtmosphere"></a>
+      <a href="#concept" data-i18n="navAbout"></a>
       <a href="#visit" data-i18n="navVisit"></a>
-      <a href="#follow" data-i18n="navFollow"></a>
     </nav>
     <div class="header-actions">
       <div class="lang-switch" id="langSwitch">
         <button data-lang="en" aria-pressed="true">EN</button>
         <button data-lang="ar" aria-pressed="false">AR</button>
       </div>
+      <a class="btn btn-primary order-now-btn" href="https://www.instagram.com/savva_cafe" target="_blank" rel="noopener" data-i18n="navOrder"></a>
       <button class="hamburger" id="hamburgerBtn" aria-label="Menu"><svg><use href="#i-menu"/></svg></button>
     </div>
   </div>
   <div class="mobile-nav" id="mobileNav">
-    <a href="#concept" data-i18n="navConcept"></a>
+    <a href="#top" data-i18n="navHome"></a>
     <a href="#menu" data-i18n="navMenu"></a>
-    <a href="#atmosphere" data-i18n="navAtmosphere"></a>
+    <a href="#concept" data-i18n="navAbout"></a>
     <a href="#visit" data-i18n="navVisit"></a>
-    <a href="#follow" data-i18n="navFollow"></a>
   </div>
 </header>
 
@@ -381,6 +403,23 @@
     </div>
   </section>
 
+  <!-- ============ DELIVERY STRIP ============ -->
+  <div class="scooter-track" aria-hidden="true">
+    <svg class="scooter-svg" viewBox="0 0 160 90" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="34" cy="68" r="13" fill="none" stroke="currentColor" stroke-width="3"/>
+      <circle cx="118" cy="68" r="13" fill="none" stroke="currentColor" stroke-width="3"/>
+      <circle cx="34" cy="68" r="4" fill="currentColor"/>
+      <circle cx="118" cy="68" r="4" fill="currentColor"/>
+      <path d="M34 68 L60 68 L78 44 L104 44 L118 68" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M78 44 L84 26" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M75 25 L93 25" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+      <circle cx="96" cy="30" r="8" fill="currentColor"/>
+      <path d="M96 38 Q86 50 78 46" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+      <rect x="8" y="42" width="20" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="2.5"/>
+      <path d="M13 42 v-11 a4.5 4.5 0 0 1 9 0 v11" fill="none" stroke="currentColor" stroke-width="2.2"/>
+    </svg>
+  </div>
+
   <div class="divider"><span class="divider-mark"></span></div>
 
   <!-- ============ ATMOSPHERE ============ -->
@@ -408,19 +447,29 @@
         <span class="eyebrow" data-i18n="visitEyebrow"></span>
         <h2 data-i18n="visitTitle"></h2>
       </div>
-      <div class="visit-card" data-reveal>
-        <div class="visit-row">
-          <svg><use href="#i-pin"/></svg>
-          <div><b data-i18n="visitAddressLabel"></b><span data-i18n="visitAddress"></span></div>
+      <div class="visit-grid">
+        <div>
+          <div class="visit-map" data-reveal>
+            <iframe
+              src="https://www.openstreetmap.org/export/embed.html?bbox=39.5751%2C24.4843%2C39.5951%2C24.5023&marker=24.4933%2C39.5851&layer=mapnik"
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Savva — Bir Uthman, Madinah"></iframe>
+          </div>
+          <p class="map-credit">© OpenStreetMap contributors — <span data-i18n="visitMapNote"></span></p>
         </div>
-        <div class="visit-row">
-          <svg><use href="#i-clock"/></svg>
-          <div><b data-i18n="visitHoursLabel"></b><span data-i18n="visitHours"></span></div>
+        <div class="visit-card" data-reveal>
+          <div class="visit-row">
+            <svg><use href="#i-pin"/></svg>
+            <div><b data-i18n="visitAddressLabel"></b><span data-i18n="visitAddress"></span></div>
+          </div>
+          <div class="visit-row">
+            <svg><use href="#i-clock"/></svg>
+            <div><b data-i18n="visitHoursLabel"></b><span data-i18n="visitHours"></span></div>
+          </div>
+          <p class="visit-note" data-i18n="visitNote"></p>
+          <a href="#" id="visitDirectionsBtn" class="btn btn-primary" target="_blank" rel="noopener" style="margin-top:20px;">
+            <svg><use href="#i-pin"/></svg><span data-i18n="ctaDirections"></span>
+          </a>
         </div>
-        <p class="visit-note" data-i18n="visitNote"></p>
-        <a href="#" id="visitDirectionsBtn" class="btn btn-primary" target="_blank" rel="noopener" style="margin-top:20px;">
-          <svg><use href="#i-pin"/></svg><span data-i18n="ctaDirections"></span>
-        </a>
       </div>
     </div>
   </section>
@@ -480,7 +529,7 @@
 
   var STRINGS = {
     en: {
-      navConcept:"Concept", navMenu:"Menu", navAtmosphere:"Atmosphere", navVisit:"Visit", navFollow:"Follow",
+      navHome:"Home", navMenu:"Menu", navAbout:"About", navVisit:"Visit Us", navOrder:"Order Now",
       heroLead:"“A day in Savva is what you need to be Savva.”",
       ctaDirections:"Get Directions",
       conceptEyebrow:"The Concept", conceptTitle:"Specialty coffee, unhurried",
@@ -508,6 +557,7 @@
       visitAddressLabel:"Address", visitAddress:"Zubairah Al Roumiah, Bir Uthman, Madinah 42331, Saudi Arabia",
       visitHoursLabel:"Hours", visitHours:"Daily · 5:00 PM – 12:00 AM",
       visitNote:"Typical hours — please confirm on Google Maps before visiting.",
+      visitMapNote:"approximate neighborhood — use Get Directions for the exact spot",
       followEyebrow:"Stay Close", followTitle:"Follow along",
       followIgText:"Photos, drops and the day-to-day of Savva.",
       followTtText:"Short clips from the café floor.",
@@ -516,7 +566,7 @@
       footerTagline:"Specialty coffee in Madinah"
     },
     ar: {
-      navConcept:"الفكرة", navMenu:"القائمة", navAtmosphere:"الأجواء", navVisit:"الموقع", navFollow:"تابعونا",
+      navHome:"الرئيسية", navMenu:"القائمة", navAbout:"من نحن", navVisit:"زورونا", navOrder:"اطلب الآن",
       heroLead:"“يوم في سافا هو ما تحتاجه لتكون سافا.”",
       ctaDirections:"احصل على الاتجاهات",
       conceptEyebrow:"الفكرة", conceptTitle:"قهوة مختصة، بلا استعجال",
@@ -544,6 +594,7 @@
       visitAddressLabel:"العنوان", visitAddress:"زبيرة الرومية، بئر عثمان، المدينة المنورة 42331، السعودية",
       visitHoursLabel:"ساعات العمل", visitHours:"يوميًا · 5:00 م – 12:00 ص",
       visitNote:"أوقات تقريبية — يرجى التأكد عبر خرائط جوجل قبل الزيارة.",
+      visitMapNote:"موقع تقريبي للحي — استخدم زر الاتجاهات للوصول الدقيق",
       followEyebrow:"ابقوا على تواصل", followTitle:"تابعونا",
       followIgText:"صور وتحديثات من أجواء سافا اليومية.",
       followTtText:"مقاطع قصيرة من داخل المقهى.",
