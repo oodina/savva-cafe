@@ -129,7 +129,7 @@
   .orb-2{ top:7%; right:5%; height:270px; z-index:3; animation-duration:9s; animation-delay:.6s; }
   .orb-3{ bottom:22%; left:7%; height:190px; z-index:1; opacity:.88; animation-duration:13s; animation-delay:1.4s; }
   .orb-4{ bottom:6%; right:8%; height:300px; z-index:3; animation-duration:11s; animation-delay:.3s; }
-  .orb-5{ top:42%; left:45%; height:170px; z-index:3; animation-duration:8s; animation-delay:.9s; }
+  .orb-5{ bottom:7%; left:40%; height:150px; z-index:1; opacity:.85; animation-duration:8s; animation-delay:.9s; }
   .drink-orb img{ height:100%; }
   @keyframes orbFloat{
     0%{ transform:translate(var(--px,0px),var(--py,0px)) translateY(0) rotate(-4deg); }
@@ -138,7 +138,7 @@
   }
   @media (max-width:760px){
     .orb-1{ height:140px; } .orb-2{ height:165px; }
-    .orb-3{ height:115px; } .orb-4{ height:180px; } .orb-5{ height:105px; }
+    .orb-3{ height:115px; } .orb-4{ height:180px; } .orb-5{ height:95px; }
   }
   @media (max-width:520px){ .orb-3, .orb-5{ display:none; } }
 
@@ -259,13 +259,13 @@
     text-align:center; display:flex; flex-direction:column; align-items:center; gap:12px;
   }
   .follow-card svg{ width:30px; height:30px; color:var(--accent); }
-  .follow-card h4{ font-size:17px; }
+  .follow-card h3{ font-size:17px; }
   .follow-card p{ font-size:13px; color:var(--ink-soft); }
 
   footer.site-footer{ padding:44px 0 30px; border-top:1px solid var(--line); }
   .footer-grid{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px; margin-bottom:24px; }
-  .footer-col h5{ font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-bottom:10px; font-weight:700; }
-  html[lang="ar"] .footer-col h5{ letter-spacing:.02em; text-transform:none; }
+  .footer-col h4{ font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-bottom:10px; font-weight:700; }
+  html[lang="ar"] .footer-col h4{ letter-spacing:.02em; text-transform:none; }
   .footer-col p, .footer-col a{ font-size:13.5px; color:var(--ink-soft); text-decoration:none; display:block; margin-bottom:4px; }
   footer.site-footer .bottom{ font-size:12px; color:var(--ink-soft); text-align:center; padding-top:20px; border-top:1px solid var(--line); }
 
@@ -372,7 +372,8 @@
         <p data-i18n="menuLead"></p>
       </div>
       <div class="menu-tabs" id="menuTabs" data-reveal>
-        <button class="menu-tab" data-cat="drink" aria-pressed="true" data-i18n="menuTabDrinks"></button>
+        <button class="menu-tab" data-cat="coffee" aria-pressed="true" data-i18n="menuTabCoffee"></button>
+        <button class="menu-tab" data-cat="refresh" aria-pressed="false" data-i18n="menuTabRefreshers"></button>
         <button class="menu-tab" data-cat="dessert" aria-pressed="false" data-i18n="menuTabDesserts"></button>
       </div>
       <div class="drink-grid" id="drinkGrid"></div>
@@ -436,12 +437,12 @@
       <div class="follow-grid">
         <a class="follow-card" href="https://www.instagram.com/savva_cafe" target="_blank" rel="noopener" data-reveal>
           <svg><use href="#i-instagram"/></svg>
-          <h4>@savva_cafe</h4>
+          <h3>@savva_cafe</h3>
           <p data-i18n="followIgText"></p>
         </a>
         <a class="follow-card" href="https://www.tiktok.com/@savva_cafe" target="_blank" rel="noopener" data-reveal>
           <svg><use href="#i-music"/></svg>
-          <h4>@savva_cafe</h4>
+          <h3>@savva_cafe</h3>
           <p data-i18n="followTtText"></p>
         </a>
       </div>
@@ -453,15 +454,15 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-col">
-        <h5 data-i18n="footerAddressLabel"></h5>
+        <h4 data-i18n="footerAddressLabel"></h4>
         <p data-i18n="visitAddress"></p>
       </div>
       <div class="footer-col">
-        <h5 data-i18n="footerHoursLabel"></h5>
+        <h4 data-i18n="footerHoursLabel"></h4>
         <p data-i18n="visitHours"></p>
       </div>
       <div class="footer-col">
-        <h5 data-i18n="footerContactLabel"></h5>
+        <h4 data-i18n="footerContactLabel"></h4>
         <p data-i18n="footerPhonePending"></p>
         <a href="https://www.instagram.com/savva_cafe" target="_blank" rel="noopener">Instagram — @savva_cafe</a>
         <a href="https://www.tiktok.com/@savva_cafe" target="_blank" rel="noopener">TikTok — @savva_cafe</a>
@@ -487,8 +488,10 @@
       conceptP2:"The space holds both indoor and outdoor seating, welcomes families, and keeps a warm soundtrack running underneath it all.",
       chipOutdoor:"Indoor & Outdoor Seating", chipFamily:"Family Friendly", chipMusic:"Live Ambience",
       menuEyebrow:"On the Menu", menuTitle:"A taste of Savva", menuLead:"A few favourites, straight from Savva's own Instagram.",
-      menuTabDrinks:"Drinks", menuTabDesserts:"Desserts",
+      menuTabCoffee:"Coffee", menuTabRefreshers:"Refreshers", menuTabDesserts:"Desserts",
       menuIcedHibiscus:"Ice Hibiscus", menuIcedHibiscusDesc:"Vibrant, lightly sweet-tart iced hibiscus — perfect for a hot day.",
+      menuBerryTea:"Iced Berry Tea", menuBerryTeaDesc:"Chilled berry tea with fresh raspberries — bright and fruity.",
+      menuIcedLatte:"Iced Latte", menuIcedLatteDesc:"Smooth espresso over milk and ice — an easy everyday favourite.",
       menuMatchaBerry:"Matcha Berry", menuMatchaBerryDesc:"Earthy matcha layered over a bright berry base.",
       menuMelon:"Melon", menuMelonDesc:"Cool, blended cantaloupe — a taste of summer.",
       menuFreddo:"Freddo", menuFreddoDesc:"Whipped iced coffee, rich and smooth over ice.",
@@ -521,8 +524,10 @@
       conceptP2:"يضم المكان جلسات داخلية وخارجية، ويرحب بالعائلات، مع موسيقى هادئة ترافق الأجواء.",
       chipOutdoor:"جلسات داخلية وخارجية", chipFamily:"مناسب للعائلات", chipMusic:"أجواء موسيقية",
       menuEyebrow:"القائمة", menuTitle:"مذاق سافا", menuLead:"أشهر الأصناف، مباشرة من إنستغرام سافا.",
-      menuTabDrinks:"المشروبات", menuTabDesserts:"الحلويات",
+      menuTabCoffee:"القهوة", menuTabRefreshers:"المشروبات المنعشة", menuTabDesserts:"الحلويات",
       menuIcedHibiscus:"كركديه مثلج", menuIcedHibiscusDesc:"كركديه بارد بلون أحمر زاهٍ ومذاق حلو خفيف — مثالي في الأيام الحارة.",
+      menuBerryTea:"آيس شاي بالتوت", menuBerryTeaDesc:"شاي بارد بحبات التوت الطازجة — منعش وحيوي.",
+      menuIcedLatte:"آيس لاتيه", menuIcedLatteDesc:"إسبريسو ناعم مع الحليب والثلج — مفضل يومي بسيط.",
       menuMatchaBerry:"ماتشا بيري", menuMatchaBerryDesc:"ماتشا ترابية النكهة فوق قاعدة من التوت المنعش.",
       menuMelon:"شمام", menuMelonDesc:"شمام مثلج ومخفوق — طعم الصيف في كل رشفة.",
       menuFreddo:"فريدو", menuFreddoDesc:"قهوة مخفوقة مثلجة، غنية وناعمة فوق الثلج.",
@@ -552,17 +557,19 @@
   // own Instagram posts and highlights (see README). No prices anywhere
   // were ever posted, so none are shown — never invented.
   var MENU_ITEMS = [
-    { cat:"drink", img:"img/ice-hibiscus.jpg", nameKey:"menuIcedHibiscus", descKey:"menuIcedHibiscusDesc" },
-    { cat:"drink", img:"img/matcha-berry.jpg", nameKey:"menuMatchaBerry", descKey:"menuMatchaBerryDesc" },
-    { cat:"drink", img:"img/melon.jpg", nameKey:"menuMelon", descKey:"menuMelonDesc" },
-    { cat:"drink", img:"img/freddo.jpg", nameKey:"menuFreddo", descKey:"menuFreddoDesc" },
+    { cat:"coffee", img:"img/freddo-pour.jpg", nameKey:"menuFreddo", descKey:"menuFreddoDesc" },
+    { cat:"coffee", img:"img/iced-latte-hand.jpg", nameKey:"menuIcedLatte", descKey:"menuIcedLatteDesc" },
+    { cat:"refresh", img:"img/ice-hibiscus.jpg", nameKey:"menuIcedHibiscus", descKey:"menuIcedHibiscusDesc" },
+    { cat:"refresh", img:"img/iced-berry-tea.jpg", nameKey:"menuBerryTea", descKey:"menuBerryTeaDesc" },
+    { cat:"refresh", img:"img/matcha-berry.jpg", nameKey:"menuMatchaBerry", descKey:"menuMatchaBerryDesc" },
+    { cat:"refresh", img:"img/melon.jpg", nameKey:"menuMelon", descKey:"menuMelonDesc" },
     { cat:"dessert", img:"img/blueberry-cheesecake.jpg", nameKey:"menuBlueberryCheesecake", descKey:"menuBlueberryCheesecakeDesc" },
     { cat:"dessert", img:"img/cinnabon-danish.jpg", nameKey:"menuCinnabonDanish", descKey:"menuCinnabonDanishDesc" },
     { cat:"dessert", img:"img/madini-cookies.jpg", nameKey:"menuMadiniCookies", descKey:"menuMadiniCookiesDesc" },
     { cat:"dessert", img:"img/chocolate-caramel-cake.jpg", nameKey:"menuChocCake", descKey:"menuChocCakeDesc" },
     { cat:"dessert", img:"img/kunafa.jpg", nameKey:"menuKunafa", descKey:"menuKunafaDesc" }
   ];
-  var activeMenuCat = "drink";
+  var activeMenuCat = "coffee";
 
   var state = { lang:"en" };
   try{
