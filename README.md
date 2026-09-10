@@ -12,7 +12,8 @@ browser to render, Instagram blocks unauthenticated scraping), so this list
 is intentionally conservative.
 
 **Confirmed:**
-- Name: Savva / سافا
+- Name: Savva / سافا, real logo wordmark ("SAVVA COFFEE") seen on cups in the
+  café's own photos
 - Address: Zubairah Al Roumiah, Bir Uthman, Madinah 42331, Saudi Arabia
 - Instagram: `@savva_cafe` — bio: *"Specialty coffee ☕️ Saudi Arabia, madinah
   📍 'A day in savva is what you need to be savva'"*
@@ -20,6 +21,13 @@ is intentionally conservative.
   Madinah" videos)
 - Category: specialty coffee café, indoor **and** outdoor seating, children
   allowed, music present
+- **Menu — real items**, from the client's own Instagram post/highlight
+  screenshots (cropped into `img/`, app UI removed): Ice Hibiscus, Matcha
+  Berry, Melon, Freddo, Blueberry Cheesecake, Cinnabon Danish, Madini
+  Cookies, Kunafa. "Chocolate Caramel Cake" is our own descriptive label —
+  the photo is real but no name was given for it anywhere.
+- **Brand color** — the dark theme's green (`#2A331E` family) was sampled
+  from the actual cup/logo color in the client's photos, not invented.
 
 **Not confirmed — placeholders, do not treat as final:**
 - Opening hours ("Daily · 5:00 PM – 12:00 AM") — from a third-party Arabic
@@ -27,25 +35,24 @@ is intentionally conservative.
 - Phone / WhatsApp number — none found anywhere; footer shows "coming soon"
 - Google's star rating and review count — the Maps page never rendered for
   us; nothing to quote
-- All menu items and every price — no real menu was available. The Menu
-  section lists **generic, universally-safe specialty-coffee drink names**
-  (Espresso, Cappuccino, Cold Brew, Mango Smoothie, etc.) with no prices
-  attached — not Savva's actual named items
-- Interior style, brand colors, and every visual in the "Atmosphere" section
-  — the whole visual identity (dark espresso palette, gold accent, canvas
-  particle animation, gradient "mood" panels) is our own proposed design,
-  not derived from any real branding or photo
+- **Prices** — not one price appears anywhere in any source material
+  (Instagram, TikTok, Maps, directories). Every menu card intentionally
+  shows no price; the hero's floating card says "Ask in-café for pricing."
+  Do not add prices without getting them from the café directly.
+- Typography (Baloo 2 / Baloo Bhaijaan 2) approximates the real logo's
+  rounded "bubble-letter" look — it is not the café's actual brand font
+  (we don't have that file).
 
-**Do not launch this site publicly until hours, phone number, and menu are
+**Do not launch this site publicly until hours, phone number, and prices are
 confirmed by the café.**
 
 ## Editing content
 
-Everything — copy, drink list, address, hours — lives inside `index.html`:
+Everything — copy, menu list, address, hours — lives inside `index.html`:
 - `STRINGS` (near the top of the `<script>`) holds every UI string in both
   `en` and `ar`.
-- `DRINKS` holds the drinks-menu items (category, icon, name/description
-  keys) shown in the tabbed "Menu" section.
+- `MENU_ITEMS` holds the menu cards (category, photo path, name/description
+  keys) shown in the tabbed "Menu" section — photos live in `img/`.
 - `MAPS_URL` is the one Google Maps link used by both "Get Directions"
   buttons.
 
