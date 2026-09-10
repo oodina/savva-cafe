@@ -242,24 +242,33 @@
   @media (prefers-reduced-motion: reduce){ .mood-bg{ animation:none; } }
 
   /* ---------- Visit ---------- */
-  .visit-grid{ display:flex; align-items:center; justify-content:center; gap:44px; flex-wrap:wrap; }
+  .visit-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; align-items:stretch; }
+  @media (max-width:980px){ .visit-grid{ grid-template-columns:1fr; max-width:420px; margin-inline:auto; } }
+  .visit-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:36px 30px;
+    text-align:center; box-shadow:var(--shadow-sm);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+  }
   .visit-map{
-    width:280px; height:280px; border-radius:50%; overflow:hidden; flex:0 0 auto;
+    width:220px; height:220px; border-radius:50%; overflow:hidden; flex:0 0 auto;
     border:4px solid var(--surface-2); box-shadow:var(--shadow-sm); position:relative;
   }
   .visit-map iframe{ position:absolute; inset:-8%; width:116%; height:116%; border:0; }
-  @media (max-width:540px){ .visit-map{ width:220px; height:220px; } }
-  .map-credit{ text-align:center; font-size:12px; color:var(--ink-soft); margin-top:10px; max-width:280px; }
-  .visit-card{
-    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:40px;
-    max-width:420px; text-align:center; box-shadow:var(--shadow-sm);
-  }
-  .visit-row{ display:flex; align-items:flex-start; gap:14px; justify-content:center; margin-bottom:18px; text-align:start; max-width:420px; margin-inline:auto; }
+  .map-credit{ text-align:center; font-size:12px; color:var(--ink-soft); margin-top:14px; max-width:260px; }
+  .visit-row{ display:flex; align-items:flex-start; gap:14px; justify-content:center; margin-bottom:18px; text-align:start; width:100%; max-width:320px; margin-inline:auto; }
   .visit-row svg{ width:20px; height:20px; color:var(--accent); flex:0 0 auto; margin-top:2px; }
   .visit-row b{ display:block; font-size:14.5px; margin-bottom:2px; }
   .visit-row span{ font-size:13.5px; color:var(--ink-soft); }
   .visit-note{ font-size:12px; color:var(--ink-soft); font-style:italic; margin-top:6px; }
   html[lang="ar"] .visit-note{ font-style:normal; }
+  .visit-lottie{
+    width:200px; height:200px; margin-inline:auto; border-radius:var(--radius-md);
+    background:var(--surface-2); overflow:hidden; display:flex; align-items:center; justify-content:center;
+  }
+  .visit-lottie svg{ width:100%; height:100%; }
+  .lottie-credit{ font-size:11px; color:var(--ink-soft); margin-top:14px; max-width:240px; line-height:1.5; }
+  .lottie-credit a{ color:var(--ink-soft); text-decoration:underline; }
+  .visit-cta{ display:flex; justify-content:center; margin-top:36px; }
 
   /* ---------- Why choose us ---------- */
   .why-heading{
@@ -276,34 +285,6 @@
   .why-card svg{ width:26px; height:26px; color:var(--accent); margin-bottom:12px; }
   .why-card h4{ font-size:15px; margin-bottom:6px; }
   .why-card p{ font-size:13px; color:var(--ink-soft); }
-
-  /* ---------- Delivery / Order CTA ---------- */
-  .delivery-layout{ display:flex; align-items:center; justify-content:center; gap:44px; flex-wrap:wrap; }
-  .delivery-scene{
-    position:relative; width:240px; height:150px; overflow:hidden; flex:0 0 auto;
-    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg);
-  }
-  .scooter-svg-big{
-    position:absolute; top:50%; left:0; width:130px; height:auto; color:var(--accent);
-    transform:translate(20px, -50%); animation:sceneRide 6s ease-in-out infinite;
-  }
-  @keyframes sceneRide{
-    0%,100%{ transform:translate(15px, -50%); }
-    50%{ transform:translate(95px, calc(-50% - 6px)); }
-  }
-  @media (prefers-reduced-motion: reduce){ .scooter-svg-big{ animation:none; } }
-  .delivery-ribbon{
-    writing-mode:vertical-rl; text-orientation:mixed; background:var(--accent); border-radius:999px;
-    padding:34px 16px; display:flex; flex-direction:column; align-items:center; justify-content:center;
-    gap:26px; min-height:260px; flex:0 0 auto;
-  }
-  .ribbon-link{
-    color:var(--primary-ink); font-weight:800; letter-spacing:.18em; text-transform:uppercase;
-    text-decoration:none; font-size:14px; transition:transform .18s cubic-bezier(.25,1,.35,1);
-  }
-  .ribbon-link:hover{ transform:scale(1.06); }
-  html[lang="ar"] .ribbon-link{ letter-spacing:.03em; }
-  .ribbon-dot{ width:6px; height:6px; border-radius:50%; background:var(--primary-ink); opacity:.6; flex:0 0 auto; }
 
   /* ---------- Follow ---------- */
   .follow-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; max-width:640px; margin-inline:auto; }
@@ -457,49 +438,6 @@
 
   <div class="divider"><span class="divider-mark"></span></div>
 
-  <!-- ============ DELIVERY / ORDER CTA ============ -->
-  <section id="delivery">
-    <div class="container">
-      <div class="section-head center" data-reveal>
-        <span class="eyebrow" data-i18n="deliveryEyebrow"></span>
-        <h2 data-i18n="deliveryTitle"></h2>
-        <p data-i18n="deliveryLead"></p>
-      </div>
-      <div class="delivery-layout">
-        <div class="delivery-scene" data-reveal>
-          <svg class="scooter-svg-big" viewBox="0 0 160 90" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="34" cy="68" r="13" fill="none" stroke="currentColor" stroke-width="3"/>
-            <circle cx="118" cy="68" r="13" fill="none" stroke="currentColor" stroke-width="3"/>
-            <circle cx="34" cy="68" r="4" fill="currentColor"/>
-            <circle cx="118" cy="68" r="4" fill="currentColor"/>
-            <path d="M34 68 L60 68 L78 44 L104 44 L118 68" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M78 44 L84 26" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
-            <path d="M75 25 L93 25" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
-            <circle cx="96" cy="30" r="8" fill="currentColor"/>
-            <path d="M96 38 Q86 50 78 46" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
-            <rect x="8" y="42" width="20" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="2.5"/>
-            <path d="M13 42 v-11 a4.5 4.5 0 0 1 9 0 v11" fill="none" stroke="currentColor" stroke-width="2.2"/>
-          </svg>
-        </div>
-        <div class="delivery-ribbon" data-reveal>
-          <a class="ribbon-link" href="https://www.instagram.com/savva_cafe" target="_blank" rel="noopener" data-i18n="navOrder"></a>
-          <span class="ribbon-dot"></span>
-          <a class="ribbon-link" href="#visit" data-i18n="navVisit"></a>
-        </div>
-        <div data-reveal>
-          <div class="visit-map">
-            <iframe
-              src="https://www.openstreetmap.org/export/embed.html?bbox=39.5751%2C24.4843%2C39.5951%2C24.5023&marker=24.4933%2C39.5851&layer=mapnik"
-              loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Savva — Bir Uthman, Madinah"></iframe>
-          </div>
-          <p class="map-credit">© OpenStreetMap contributors — <span data-i18n="visitMapNote"></span></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"><span class="divider-mark"></span></div>
-
   <!-- ============ ATMOSPHERE ============ -->
   <section id="atmosphere">
     <div class="container">
@@ -527,6 +465,14 @@
       </div>
       <div class="visit-grid">
         <div class="visit-card" data-reveal>
+          <div class="visit-map">
+            <iframe
+              src="https://www.openstreetmap.org/export/embed.html?bbox=39.5751%2C24.4843%2C39.5951%2C24.5023&marker=24.4933%2C39.5851&layer=mapnik"
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Savva — Bir Uthman, Madinah"></iframe>
+          </div>
+          <p class="map-credit">© OpenStreetMap contributors — <span data-i18n="visitMapNote"></span></p>
+        </div>
+        <div class="visit-card" data-reveal>
           <div class="visit-row">
             <svg><use href="#i-pin"/></svg>
             <div><b data-i18n="visitAddressLabel"></b><span data-i18n="visitAddress"></span></div>
@@ -540,6 +486,17 @@
             <svg><use href="#i-pin"/></svg><span data-i18n="ctaDirections"></span>
           </a>
         </div>
+        <div class="visit-card" data-reveal>
+          <div class="visit-lottie" id="visitLottie" aria-hidden="true"></div>
+          <p class="lottie-credit">
+            <a href="https://iconscout.com/lottie-animations/deliveryman-riding-scooter" target="_blank" rel="noopener">Deliveryman Riding scooter</a>
+            by <a href="https://iconscout.com/contributors/nanoagency" target="_blank" rel="noopener">nanoagency</a>
+            on <a href="https://iconscout.com" target="_blank" rel="noopener">IconScout</a>
+          </p>
+        </div>
+      </div>
+      <div class="visit-cta" data-reveal>
+        <a class="btn btn-primary" href="https://www.instagram.com/savva_cafe" target="_blank" rel="noopener" data-i18n="deliveryBtn"></a>
       </div>
     </div>
   </section>
@@ -591,6 +548,7 @@
   </div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
 <script>
 (function(){
   "use strict";
@@ -611,8 +569,7 @@
       why2Title:"A place to stay a while", why2Text:"Indoor and outdoor seating, family-friendly, with music running underneath it all.",
       why3Title:"Real, not staged", why3Text:"Every photo on this page comes straight from our own Instagram — this is really us.",
       why4Title:"Easy to find", why4Text:"Right in Bir Uthman, Madinah — see you there.",
-      deliveryEyebrow:"On the way", deliveryTitle:"Fresh to your table",
-      deliveryLead:"Order ahead or come find us — either way, Savva is close by.",
+      deliveryBtn:"Delivery",
       menuEyebrow:"On the Menu", menuTitle:"A taste of Savva", menuLead:"A few favourites, straight from Savva's own Instagram.",
       menuTabCoffee:"Coffee", menuTabRefreshers:"Refreshers", menuTabDesserts:"Desserts",
       menuIcedHibiscus:"Ice Hibiscus", menuIcedHibiscusDesc:"Vibrant, lightly sweet-tart iced hibiscus — perfect for a hot day.",
@@ -655,8 +612,7 @@
       why2Title:"مكان يستحق البقاء فيه", why2Text:"جلسات داخلية وخارجية، مناسبة للعائلات، مع موسيقى هادئة ترافق الأجواء.",
       why3Title:"حقيقي وليس مُجمّلاً", why3Text:"كل صورة في هذه الصفحة من حسابنا الحقيقي على إنستغرام — هذا نحن فعلاً.",
       why4Title:"سهل الوصول إليه", why4Text:"في قلب حي بئر عثمان بالمدينة المنورة — بانتظاركم.",
-      deliveryEyebrow:"في الطريق إليكم", deliveryTitle:"طازج حتى طاولتكم",
-      deliveryLead:"اطلبوا مسبقًا أو تعالوا بأنفسكم — سافا قريب منكم دائمًا.",
+      deliveryBtn:"التوصيل",
       menuEyebrow:"القائمة", menuTitle:"مذاق سافا", menuLead:"أشهر الأصناف، مباشرة من إنستغرام سافا.",
       menuTabCoffee:"القهوة", menuTabRefreshers:"المشروبات المنعشة", menuTabDesserts:"الحلويات",
       menuIcedHibiscus:"كركديه مثلج", menuIcedHibiscusDesc:"كركديه بارد بلون أحمر زاهٍ ومذاق حلو خفيف — مثالي في الأيام الحارة.",
@@ -861,6 +817,25 @@
   }
 
   /* =====================================================
+     VISIT — delivery rider Lottie animation ("Deliveryman
+     Riding scooter" by nanoagency, via IconScout — real
+     asset the user downloaded and provided). Plays looped;
+     falls back to a static first frame under reduced motion.
+     ===================================================== */
+  function initLottieDelivery(){
+    var el = document.getElementById("visitLottie");
+    if(!el || typeof lottie === "undefined") return;
+    var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    lottie.loadAnimation({
+      container: el,
+      renderer: "svg",
+      loop: !reduceMotion,
+      autoplay: !reduceMotion,
+      path: "anim/deliveryman-scooter.json"
+    });
+  }
+
+  /* =====================================================
      SCROLL REVEAL — fade+rise sections into view once
      ===================================================== */
   function initScrollReveal(){
@@ -884,6 +859,7 @@
   renderDrinks();
   initNavMagnify();
   initHeroOrbParallax();
+  initLottieDelivery();
   initScrollReveal();
 })();
 </script>

@@ -46,6 +46,14 @@ is intentionally conservative.
 **Do not launch this site publicly until hours, phone number, and prices are
 confirmed by the café.**
 
+## Third-party assets
+
+- `anim/deliveryman-scooter.json` — "Deliveryman Riding scooter" Lottie
+  animation by **nanoagency**, via [IconScout](https://iconscout.com/lottie-animations/deliveryman-riding-scooter).
+  Downloaded by the client and used with on-page attribution in the Visit
+  section (per IconScout's free-with-attribution license). Rendered with the
+  `lottie-web` library, loaded from cdnjs.
+
 ## Editing content
 
 Everything — copy, menu list, address, hours — lives inside `index.html`:
