@@ -96,13 +96,12 @@
 
   /* ---------- Hero ---------- */
   .hero{
-    position:relative; min-height:92vh; display:flex; align-items:center; padding-block:120px 190px;
+    position:relative; min-height:92vh; display:flex; align-items:center; padding-block:120px;
     overflow:hidden; text-align:center;
     background:radial-gradient(circle at 20% 15%, var(--surface) 0%, transparent 45%),
                radial-gradient(circle at 82% 78%, var(--surface-2) 0%, transparent 50%),
                var(--bg);
   }
-  #heroCanvas{ position:absolute; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; }
   .hero-glow{
     position:absolute; inset:0; z-index:0; pointer-events:none;
     background:radial-gradient(ellipse 60% 50% at 50% 30%, rgba(247,245,234,.07) 0%, transparent 70%);
@@ -113,63 +112,35 @@
     font-size:clamp(84px,19vw,240px); line-height:.92; letter-spacing:-.01em; margin-block:0 22px;
     color:var(--ink-heading); position:relative; z-index:2;
   }
-  .hero-lead{ font-size:18px; font-style:italic; color:var(--ink-soft); max-width:44ch; margin:0 auto 34px; font-family:var(--font-body); position:relative; z-index:2; }
+  .hero-lead{ font-size:18px; font-style:italic; color:var(--ink-soft); max-width:44ch; margin:0 auto; font-family:var(--font-body); position:relative; z-index:2; }
   html[lang="ar"] .hero-lead{ font-style:normal; }
-  .hero-actions{ display:flex; gap:14px; flex-wrap:wrap; justify-content:center; position:relative; z-index:2; }
 
-  /* ---------- Floating drink orbs (real photos) ---------- */
+  /* ---------- Floating drinks (real photos, cutout, full-height, no frame) ---------- */
   .hero-orbs{ position:absolute; inset:0; z-index:1; pointer-events:none; }
   .drink-orb{
-    position:absolute; will-change:transform; border-radius:50%; overflow:hidden;
-    border:3px solid rgba(213,226,208,.55); box-shadow:0 22px 34px -10px rgba(0,0,0,.5);
+    position:absolute; will-change:transform;
     animation:orbFloat 10s ease-in-out infinite;
   }
-  .drink-orb img{ width:100%; height:100%; object-fit:cover; display:block; }
-  .orb-1{ top:8%; left:6%; width:124px; height:124px; z-index:1; opacity:.9; animation-duration:12s; }
-  .orb-2{ top:9%; right:7%; width:150px; height:150px; z-index:3; animation-duration:9s; animation-delay:.6s; }
-  .orb-3{ bottom:26%; left:10%; width:104px; height:104px; z-index:1; opacity:.85; animation-duration:13s; animation-delay:1.4s; }
-  .orb-4{ bottom:9%; right:11%; width:168px; height:168px; z-index:3; animation-duration:11s; animation-delay:.3s; }
-  .orb-5{ top:45%; left:47%; width:88px; height:88px; z-index:3; animation-duration:8s; animation-delay:.9s; }
+  .drink-orb img{
+    display:block; width:auto; object-fit:contain;
+    filter:drop-shadow(0 22px 26px rgba(0,0,0,.45));
+  }
+  .orb-1{ top:6%; left:5%; height:230px; z-index:1; opacity:.92; animation-duration:12s; }
+  .orb-2{ top:7%; right:5%; height:270px; z-index:3; animation-duration:9s; animation-delay:.6s; }
+  .orb-3{ bottom:22%; left:7%; height:190px; z-index:1; opacity:.88; animation-duration:13s; animation-delay:1.4s; }
+  .orb-4{ bottom:6%; right:8%; height:300px; z-index:3; animation-duration:11s; animation-delay:.3s; }
+  .orb-5{ top:42%; left:45%; height:170px; z-index:3; animation-duration:8s; animation-delay:.9s; }
+  .drink-orb img{ height:100%; }
   @keyframes orbFloat{
     0%{ transform:translate(var(--px,0px),var(--py,0px)) translateY(0) rotate(-4deg); }
     50%{ transform:translate(var(--px,0px),var(--py,0px)) translateY(-22px) rotate(3deg); }
     100%{ transform:translate(var(--px,0px),var(--py,0px)) translateY(0) rotate(-4deg); }
   }
   @media (max-width:760px){
-    .orb-1{ width:80px; height:80px; } .orb-2{ width:96px; height:96px; }
-    .orb-3{ width:66px; height:66px; } .orb-4{ width:104px; height:104px; }
-    .orb-5{ width:56px; height:56px; }
+    .orb-1{ height:140px; } .orb-2{ height:165px; }
+    .orb-3{ height:115px; } .orb-4{ height:180px; } .orb-5{ height:105px; }
   }
   @media (max-width:520px){ .orb-3, .orb-5{ display:none; } }
-
-  /* ---------- Floating glass product card ---------- */
-  .hero-float-card{
-    position:absolute; left:50%; bottom:34px; transform:translateX(-50%); z-index:4;
-    display:flex; align-items:center; gap:16px; padding:14px 22px 14px 14px; max-width:min(92vw,420px);
-    background:rgba(247,245,234,.08); backdrop-filter:blur(18px) saturate(140%);
-    border:1px solid var(--menu-border, #D5E2D0); border-radius:20px;
-    box-shadow:0 20px 40px -16px rgba(0,0,0,.5);
-  }
-  .hero-float-media{
-    width:64px !important; height:64px !important; border-radius:14px; flex:0 0 auto; overflow:hidden;
-    position:relative !important; top:auto !important; left:auto !important; right:auto !important; bottom:auto !important;
-    z-index:auto !important; animation:none !important; filter:none !important; opacity:1 !important;
-    border:1px solid var(--menu-border, #D5E2D0) !important; box-shadow:none !important;
-  }
-  .hero-float-info{ text-align:start; min-width:0; }
-  .hero-float-info h4{ font-family:var(--font-body); font-size:14.5px; font-weight:700; color:var(--ink-heading); margin-bottom:2px; }
-  .hero-float-info p{ font-size:12px; color:var(--ink-soft); margin-bottom:8px; }
-  .hero-float-row{ display:flex; align-items:center; gap:10px; }
-  .hero-float-note{ font-size:11px; color:var(--ink-soft); font-style:italic; }
-  html[lang="ar"] .hero-float-note{ font-style:normal; }
-  .hero-float-cta{
-    padding:7px 14px; border-radius:999px; border:1px solid var(--ink); background:transparent;
-    color:var(--ink-heading); font-size:11px; font-weight:700; cursor:pointer; text-decoration:none;
-    transition:transform .18s cubic-bezier(.25,1,.35,1), background .18s ease;
-  }
-  .hero-float-cta:hover{ background:rgba(247,245,234,.12); }
-  .hero-float-cta:active{ transform:scale(1.08); }
-  @media (max-width:480px){ .hero-float-card{ bottom:18px; padding:10px 16px 10px 10px; gap:12px; } .hero-float-media{ width:52px; height:52px; } }
 
   /* ---------- Section shell ---------- */
   section{ padding-block:80px; }
@@ -355,37 +326,19 @@
 <main id="top">
   <!-- ============ HERO ============ -->
   <section class="hero">
-    <canvas id="heroCanvas" aria-hidden="true"></canvas>
     <div class="hero-glow" aria-hidden="true"></div>
     <div class="hero-orbs" id="heroOrbs" aria-hidden="true">
-      <div class="drink-orb orb-1" data-depth="0.4"><img src="img/ice-hibiscus.jpg" alt="" loading="lazy"></div>
-      <div class="drink-orb orb-2" data-depth="1"><img src="img/matcha-berry.jpg" alt="" loading="lazy"></div>
-      <div class="drink-orb orb-3" data-depth="0.4"><img src="img/freddo.jpg" alt="" loading="lazy"></div>
-      <div class="drink-orb orb-4" data-depth="1.1"><img src="img/blueberry-cheesecake.jpg" alt="" loading="lazy"></div>
-      <div class="drink-orb orb-5" data-depth="1.3"><img src="img/kunafa.jpg" alt="" loading="lazy"></div>
+      <div class="drink-orb orb-1" data-depth="0.4"><img src="img/hibiscus-cutout.png" alt="" loading="lazy"></div>
+      <div class="drink-orb orb-2" data-depth="1"><img src="img/matcha-cutout.png" alt="" loading="lazy"></div>
+      <div class="drink-orb orb-3" data-depth="0.4"><img src="img/melon-cutout.png" alt="" loading="lazy"></div>
+      <div class="drink-orb orb-4" data-depth="1.1"><img src="img/freddo-cutout.png" alt="" loading="lazy"></div>
+      <div class="drink-orb orb-5" data-depth="1.3"><img src="img/berry-tea-cutout.png" alt="" loading="lazy"></div>
     </div>
     <div class="container hero-inner">
       <span class="hero-arabic">سافا</span>
       <h1>Savva</h1>
       <p class="hero-lead" data-i18n="heroLead"></p>
-      <div class="hero-actions">
-        <a href="#" id="heroDirectionsBtn" class="btn btn-primary" target="_blank" rel="noopener">
-          <svg><use href="#i-pin"/></svg><span data-i18n="ctaDirections"></span>
-        </a>
-        <a href="#concept" class="btn btn-ghost" data-i18n="ctaConcept"></a>
-      </div>
     </div>
-    <a class="hero-float-card" href="#menu">
-      <span class="hero-float-media"><img src="img/ice-hibiscus.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></span>
-      <span class="hero-float-info">
-        <h4 data-i18n="menuIcedHibiscus"></h4>
-        <p data-i18n="menuIcedHibiscusDesc"></p>
-        <span class="hero-float-row">
-          <span class="hero-float-note" data-i18n="heroFloatNote"></span>
-          <span class="hero-float-cta" data-i18n="heroFloatCta"></span>
-        </span>
-      </span>
-    </a>
   </section>
 
   <div class="divider"><span class="divider-mark"></span></div>
@@ -528,7 +481,7 @@
     en: {
       navConcept:"Concept", navMenu:"Menu", navAtmosphere:"Atmosphere", navVisit:"Visit", navFollow:"Follow",
       heroLead:"“A day in Savva is what you need to be Savva.”",
-      ctaDirections:"Get Directions", ctaConcept:"View Concept",
+      ctaDirections:"Get Directions",
       conceptEyebrow:"The Concept", conceptTitle:"Specialty coffee, unhurried",
       conceptP1:"Savva is a specialty coffee house in Madinah, built around slowing down — a cup made properly, a seat that isn't in a hurry to turn over, and a room that feels the same whether you're alone with a book or catching up with friends.",
       conceptP2:"The space holds both indoor and outdoor seating, welcomes families, and keeps a warm soundtrack running underneath it all.",
@@ -545,7 +498,6 @@
       menuChocCake:"Chocolate Caramel Cake", menuChocCakeDesc:"Layers of dark chocolate cake with a silky caramel cream.",
       menuKunafa:"Kunafa", menuKunafaDesc:"Traditional kunafa, warm and syrup-soaked.",
       drinkCta:"See on Instagram",
-      heroFloatNote:"Ask in-café for pricing", heroFloatCta:"View Menu",
       menuNote:"Full menu and current prices are available in-café and on Instagram.",
       moodEyebrow:"The Atmosphere", moodTitle:"Where evenings slow down", moodLead:"No two visits to Savva feel quite the same — the atmosphere shifts gently through the day.",
       moodGolden:"Golden Hour", moodTerrace:"Outdoor Terrace", moodNight:"Late Night",
@@ -563,7 +515,7 @@
     ar: {
       navConcept:"الفكرة", navMenu:"القائمة", navAtmosphere:"الأجواء", navVisit:"الموقع", navFollow:"تابعونا",
       heroLead:"“يوم في سافا هو ما تحتاجه لتكون سافا.”",
-      ctaDirections:"احصل على الاتجاهات", ctaConcept:"اكتشف الفكرة",
+      ctaDirections:"احصل على الاتجاهات",
       conceptEyebrow:"الفكرة", conceptTitle:"قهوة مختصة، بلا استعجال",
       conceptP1:"سافا هو بيت قهوة مختصة في المدينة المنورة، يقوم على فكرة التمهّل — كوب يُحضّر بعناية، ومقعد لا يستعجلك، وأجواء تبقى كما هي سواء كنت وحدك مع كتاب أو مع أصدقاء.",
       conceptP2:"يضم المكان جلسات داخلية وخارجية، ويرحب بالعائلات، مع موسيقى هادئة ترافق الأجواء.",
@@ -580,7 +532,6 @@
       menuChocCake:"كيك الشوكولاتة بالكراميل", menuChocCakeDesc:"طبقات من كيك الشوكولاتة الغامقة مع كريمة كراميل ناعمة.",
       menuKunafa:"كنافة", menuKunafaDesc:"كنافة تقليدية دافئة ومغموسة بالقطر.",
       drinkCta:"عرض على إنستغرام",
-      heroFloatNote:"السعر متوفر في المقهى", heroFloatCta:"عرض القائمة",
       menuNote:"القائمة الكاملة والأسعار الحالية متوفرة داخل المقهى وعلى إنستغرام.",
       moodEyebrow:"الأجواء", moodTitle:"حيث تتمهّل الأمسيات", moodLead:"لا تشبه زيارة سافا الأخرى — تتبدّل الأجواء بلطف مع ساعات اليوم.",
       moodGolden:"الساعة الذهبية", moodTerrace:"التراس الخارجي", moodNight:"سهرة متأخرة",
@@ -699,7 +650,6 @@
     });
   });
 
-  document.getElementById("heroDirectionsBtn").href = MAPS_URL;
   document.getElementById("visitDirectionsBtn").href = MAPS_URL;
 
   /* =====================================================
@@ -731,79 +681,6 @@
      atmosphere effect (canvas 2D, DPR clamp, reduced-motion
      guard) with a different motif suited to a coffee house.
      ===================================================== */
-  function initHeroCanvas(){
-    var canvas = document.getElementById("heroCanvas");
-    if(!canvas || !canvas.getContext) return;
-    var ctx = canvas.getContext("2d");
-    if(!ctx) return;
-
-    var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    var w = 0, h = 0;
-    var pointer = { x:0.5, y:0.5 };
-    var driftX = 0;
-
-    var accentHex = (getComputedStyle(document.documentElement).getPropertyValue("--accent") || "#C6A15B").trim();
-    var m = /^#([0-9a-f]{6})$/i.exec(accentHex);
-    var rgbStr = m ? [parseInt(m[1].slice(0,2),16), parseInt(m[1].slice(2,4),16), parseInt(m[1].slice(4,6),16)].join(",") : "198,161,91";
-
-    var N = 46;
-    var particles = [];
-    function resetParticle(p, initial){
-      p.x = Math.random();
-      p.y = initial ? Math.random() : 1.15;
-      p.size = 10 + Math.random() * 26;
-      p.speed = 0.02 + Math.random() * 0.035;
-      p.sway = 0.15 + Math.random() * 0.35;
-      p.phase = Math.random() * Math.PI * 2;
-      p.alpha = 0.05 + Math.random() * 0.13;
-    }
-    for(var i = 0; i < N; i++){ var p = {}; resetParticle(p, true); particles.push(p); }
-
-    function resize(){
-      var rect = canvas.parentElement.getBoundingClientRect();
-      w = rect.width; h = rect.height;
-      canvas.width = Math.round(w * dpr);
-      canvas.height = Math.round(h * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
-    resize();
-    window.addEventListener("resize", resize);
-
-    function draw(now){
-      var t = now / 1000;
-      var targetDx = (pointer.x - 0.5) * 18;
-      driftX += (targetDx - driftX) * 0.02;
-
-      ctx.clearRect(0, 0, w, h);
-      particles.forEach(function(p){
-        p.y -= p.speed * 0.016;
-        if(p.y < -0.08){ resetParticle(p, false); }
-        var px = (p.x + Math.sin(t * 0.25 + p.phase) * p.sway * 0.05) * w + driftX;
-        var py = p.y * h;
-        var grd = ctx.createRadialGradient(px, py, 0, px, py, p.size);
-        grd.addColorStop(0, "rgba(" + rgbStr + "," + p.alpha + ")");
-        grd.addColorStop(1, "rgba(" + rgbStr + ",0)");
-        ctx.fillStyle = grd;
-        ctx.beginPath();
-        ctx.arc(px, py, p.size, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      if(!reduceMotion) requestAnimationFrame(draw);
-    }
-
-    if(reduceMotion){
-      draw(0);
-    } else {
-      canvas.parentElement.addEventListener("pointermove", function(e){
-        var rect = canvas.parentElement.getBoundingClientRect();
-        pointer.x = (e.clientX - rect.left) / rect.width;
-      });
-      requestAnimationFrame(draw);
-    }
-  }
-
   /* =====================================================
      HERO ORB PARALLAX — the floating drinks drift gently
      toward the cursor, closer orbs (higher data-depth) move
