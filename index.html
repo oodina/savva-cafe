@@ -52,7 +52,7 @@
     display:inline-flex; align-items:center; justify-content:center; gap:9px; border-radius:999px;
     padding:14px 28px; font-size:14.5px; font-weight:600; cursor:pointer; border:1px solid transparent;
     transition:transform .18s cubic-bezier(.25,1,.35,1), box-shadow .2s ease, background .2s ease, border-color .2s ease;
-    white-space:nowrap; letter-spacing:.02em;
+    white-space:nowrap; letter-spacing:.02em; text-decoration:none;
   }
   .btn:active{ transform:scale(1.05); }
   .btn-primary{ background:var(--accent); color:var(--primary-ink); box-shadow:var(--shadow-sm); }
@@ -139,10 +139,16 @@
     100%{ transform:translate(var(--px,0px),var(--py,0px)) translateY(0) rotate(-4deg); }
   }
   @media (max-width:760px){
-    .orb-1{ height:140px; } .orb-2{ height:165px; }
-    .orb-3{ height:115px; } .orb-4{ height:180px; } .orb-5{ height:95px; }
+    .orb-1{ height:130px; } .orb-2{ height:150px; }
+    .orb-3{ height:105px; } .orb-4{ height:165px; } .orb-5{ height:85px; left:18%; }
   }
-  @media (max-width:520px){ .orb-3, .orb-5{ display:none; } }
+  @media (max-width:480px){
+    .orb-1{ height:76px; top:4%; left:3%; }
+    .orb-2{ height:90px; top:4%; right:3%; }
+    .orb-3{ height:62px; bottom:19%; left:3%; }
+    .orb-4{ height:96px; bottom:4%; right:3%; }
+    .orb-5{ height:54px; left:9%; bottom:2%; }
+  }
 
   /* ---------- Section shell ---------- */
   section{ padding-block:80px; }
@@ -241,24 +247,17 @@
   @keyframes moodDrift{ 0%{ background-position:0% 0%; } 100%{ background-position:100% 100%; } }
   @media (prefers-reduced-motion: reduce){ .mood-bg{ animation:none; } }
 
-  /* ---------- Visit ---------- */
-  .visit-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:24px; align-items:stretch; max-width:760px; margin-inline:auto; }
-  @media (max-width:760px){ .visit-grid{ grid-template-columns:1fr; max-width:420px; } }
-  .visit-card{
-    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:36px 30px;
-    text-align:center; box-shadow:var(--shadow-sm);
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-  }
+  /* ---------- Visit map (lives in the footer, see below) ---------- */
   .visit-map{
-    width:220px; height:220px; border-radius:50%; overflow:hidden; flex:0 0 auto;
+    width:150px; height:150px; border-radius:50%; overflow:hidden; flex:0 0 auto;
     border:4px solid var(--surface-2); box-shadow:var(--shadow-sm); position:relative;
   }
-  .visit-map iframe{ position:absolute; inset:-8%; width:116%; height:116%; border:0; }
-  .map-credit{ text-align:center; font-size:12px; color:var(--ink-soft); margin-top:14px; max-width:260px; }
-  .visit-row{ display:flex; align-items:flex-start; gap:14px; justify-content:center; margin-bottom:18px; text-align:start; width:100%; max-width:320px; margin-inline:auto; }
-  .visit-row svg{ width:20px; height:20px; color:var(--accent); flex:0 0 auto; margin-top:2px; }
-  .visit-row b{ display:block; font-size:14.5px; margin-bottom:2px; }
-  .visit-row span{ font-size:13.5px; color:var(--ink-soft); }
+  /* Overscan the iframe well past the circle, especially downward, so the
+     OSM widget's own attribution/"report a problem" strip — which OSM
+     localizes to the visitor's own browser language — is cropped away
+     entirely instead of peeking through at the bottom of the circle. */
+  .visit-map iframe{ position:absolute; left:-10%; top:-10%; width:120%; height:155%; border:0; }
+  .map-credit{ text-align:center; font-size:11.5px; color:var(--ink-soft); margin-top:12px; max-width:220px; }
   .visit-note{ font-size:12px; color:var(--ink-soft); font-style:italic; margin-top:6px; }
   html[lang="ar"] .visit-note{ font-style:normal; }
 
@@ -290,7 +289,12 @@
   .follow-card p{ font-size:13px; color:var(--ink-soft); }
 
   footer.site-footer{ padding:44px 0 30px; border-top:1px solid var(--line); }
-  .footer-grid{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px; margin-bottom:24px; }
+  .footer-grid{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:32px; margin-bottom:24px; }
+  .footer-map-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:22px;
+    display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center; flex:0 0 auto;
+  }
+  .footer-map-card .btn{ padding:9px 18px; font-size:12.5px; }
   .footer-col h4{ font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-bottom:10px; font-weight:700; }
   html[lang="ar"] .footer-col h4{ letter-spacing:.02em; text-transform:none; }
   .footer-col p, .footer-col a{ font-size:13.5px; color:var(--ink-soft); text-decoration:none; display:block; margin-bottom:4px; }
@@ -448,42 +452,6 @@
 
   <div class="divider"><span class="divider-mark"></span></div>
 
-  <!-- ============ VISIT ============ -->
-  <section id="visit">
-    <div class="container">
-      <div class="section-head center" data-reveal>
-        <span class="eyebrow" data-i18n="visitEyebrow"></span>
-        <h2 data-i18n="visitTitle"></h2>
-      </div>
-      <div class="visit-grid">
-        <div class="visit-card" data-reveal>
-          <div class="visit-map">
-            <iframe
-              src="https://www.openstreetmap.org/export/embed.html?bbox=39.5751%2C24.4843%2C39.5951%2C24.5023&marker=24.4933%2C39.5851&layer=mapnik"
-              loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Savva — Bir Uthman, Madinah"></iframe>
-          </div>
-          <p class="map-credit">© OpenStreetMap contributors — <span data-i18n="visitMapNote"></span></p>
-        </div>
-        <div class="visit-card" data-reveal>
-          <div class="visit-row">
-            <svg><use href="#i-pin"/></svg>
-            <div><b data-i18n="visitAddressLabel"></b><span data-i18n="visitAddress"></span></div>
-          </div>
-          <div class="visit-row">
-            <svg><use href="#i-clock"/></svg>
-            <div><b data-i18n="visitHoursLabel"></b><span data-i18n="visitHours"></span></div>
-          </div>
-          <p class="visit-note" data-i18n="visitNote"></p>
-          <a href="#" id="visitDirectionsBtn" class="btn btn-primary" target="_blank" rel="noopener" style="margin-top:20px;">
-            <svg><use href="#i-pin"/></svg><span data-i18n="ctaDirections"></span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"><span class="divider-mark"></span></div>
-
   <!-- ============ FOLLOW ============ -->
   <section id="follow">
     <div class="container">
@@ -507,9 +475,20 @@
   </section>
 </main>
 
-<footer class="site-footer">
+<footer class="site-footer" id="visit">
   <div class="container">
     <div class="footer-grid">
+      <div class="footer-map-card" data-reveal>
+        <div class="visit-map">
+          <iframe
+            src="https://www.openstreetmap.org/export/embed.html?bbox=39.5751%2C24.4843%2C39.5951%2C24.5023&marker=24.4933%2C39.5851&layer=mapnik"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Savva — Bir Uthman, Madinah"></iframe>
+        </div>
+        <p class="map-credit">© OpenStreetMap contributors — <span data-i18n="visitMapNote"></span></p>
+        <a href="#" id="visitDirectionsBtn" class="btn btn-primary" target="_blank" rel="noopener">
+          <svg><use href="#i-pin"/></svg><span data-i18n="ctaDirections"></span>
+        </a>
+      </div>
       <div class="footer-col">
         <h4 data-i18n="footerAddressLabel"></h4>
         <p data-i18n="visitAddress"></p>
@@ -517,6 +496,7 @@
       <div class="footer-col">
         <h4 data-i18n="footerHoursLabel"></h4>
         <p data-i18n="visitHours"></p>
+        <p class="visit-note" data-i18n="visitNote"></p>
       </div>
       <div class="footer-col">
         <h4 data-i18n="footerContactLabel"></h4>
@@ -566,9 +546,8 @@
       menuNote:"Full menu and current prices are available in-café and on Instagram.",
       moodEyebrow:"The Atmosphere", moodTitle:"Where evenings slow down", moodLead:"No two visits to Savva feel quite the same — the atmosphere shifts gently through the day.",
       moodGolden:"Golden Hour", moodTerrace:"Outdoor Terrace", moodNight:"Late Night",
-      visitEyebrow:"Visit Us", visitTitle:"Find Savva",
-      visitAddressLabel:"Address", visitAddress:"Zubairah Al Roumiah, Bir Uthman, Madinah 42331, Saudi Arabia",
-      visitHoursLabel:"Hours", visitHours:"Daily · 5:00 PM – 12:00 AM",
+      visitAddress:"Zubairah Al Roumiah, Bir Uthman, Madinah 42331, Saudi Arabia",
+      visitHours:"Daily · 5:00 PM – 12:00 AM",
       visitNote:"Typical hours — please confirm on Google Maps before visiting.",
       visitMapNote:"approximate neighborhood — use Get Directions for the exact spot",
       followEyebrow:"Stay Close", followTitle:"Follow along",
@@ -608,9 +587,8 @@
       menuNote:"القائمة الكاملة والأسعار الحالية متوفرة داخل المقهى وعلى إنستغرام.",
       moodEyebrow:"الأجواء", moodTitle:"حيث تتمهّل الأمسيات", moodLead:"لا تشبه زيارة سافا الأخرى — تتبدّل الأجواء بلطف مع ساعات اليوم.",
       moodGolden:"الساعة الذهبية", moodTerrace:"التراس الخارجي", moodNight:"سهرة متأخرة",
-      visitEyebrow:"زورونا", visitTitle:"موقع سافا",
-      visitAddressLabel:"العنوان", visitAddress:"زبيرة الرومية، بئر عثمان، المدينة المنورة 42331، السعودية",
-      visitHoursLabel:"ساعات العمل", visitHours:"يوميًا · 5:00 م – 12:00 ص",
+      visitAddress:"زبيرة الرومية، بئر عثمان، المدينة المنورة 42331، السعودية",
+      visitHours:"يوميًا · 5:00 م – 12:00 ص",
       visitNote:"أوقات تقريبية — يرجى التأكد عبر خرائط جوجل قبل الزيارة.",
       visitMapNote:"موقع تقريبي للحي — استخدم زر الاتجاهات للوصول الدقيق",
       followEyebrow:"ابقوا على تواصل", followTitle:"تابعونا",
