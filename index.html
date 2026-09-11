@@ -226,20 +226,50 @@
   }
   html[lang="ar"] .menu-note{ font-style:normal; }
 
-  /* ---------- Atmosphere ---------- */
-  .mood-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
-  @media (max-width:820px){ .mood-grid{ grid-template-columns:1fr; } }
-  .mood-card{
-    aspect-ratio:3/4; border-radius:var(--radius-lg); position:relative; overflow:hidden; border:1px solid var(--line);
-    display:flex; align-items:flex-end; padding:24px;
+  /* ---------- Be the barista: drink builder ---------- */
+  .builder{ display:grid; grid-template-columns:1.1fr .9fr; gap:44px; align-items:start; }
+  @media (max-width:860px){ .builder{ grid-template-columns:1fr; } }
+  .builder-controls{ display:flex; flex-direction:column; gap:22px; }
+  .builder-group-label{
+    display:block; font-size:12.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft);
+    margin-bottom:10px; font-weight:700;
   }
-  .mood-card span{ font-family:var(--font-display); font-size:22px; color:var(--ink-heading); position:relative; z-index:2; }
-  .mood-bg{ position:absolute; inset:0; z-index:1; animation:moodDrift 14s ease-in-out infinite alternate; background-size:200% 200%; }
-  .mood-card.gold .mood-bg{ background-image:radial-gradient(circle at 30% 70%, #7A5A2C, #1B120D 75%); }
-  .mood-card.terrace .mood-bg{ background-image:radial-gradient(circle at 70% 30%, #3E4A2E, #1B120D 75%); }
-  .mood-card.night .mood-bg{ background-image:radial-gradient(circle at 50% 80%, #3A2A4A, #1B120D 75%); }
-  @keyframes moodDrift{ 0%{ background-position:0% 0%; } 100%{ background-position:100% 100%; } }
-  @media (prefers-reduced-motion: reduce){ .mood-bg{ animation:none; } }
+  html[lang="ar"] .builder-group-label{ letter-spacing:.02em; text-transform:none; }
+  .builder-options{ display:flex; flex-wrap:wrap; gap:8px; }
+  .builder-chip{
+    padding:9px 17px; border-radius:999px; border:1px solid var(--line); background:var(--surface);
+    color:var(--ink-soft); font-size:13px; font-weight:600; cursor:pointer;
+    transition:transform .18s cubic-bezier(.25,1,.35,1), background .18s ease, color .18s ease, border-color .18s ease;
+  }
+  .builder-chip[aria-pressed="true"]{ background:var(--accent); color:var(--primary-ink); border-color:var(--accent); transform:scale(1.06); }
+  .builder-chip:active{ transform:scale(1.1); }
+  .builder-preview{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:34px 30px;
+    text-align:center; box-shadow:var(--shadow-sm); display:flex; flex-direction:column; align-items:center; gap:16px;
+    position:sticky; top:100px;
+  }
+  .builder-cup-svg{ width:110px; height:145px; color:var(--ink-soft); overflow:visible; }
+  #builderLiquidFill{ fill:#6B4226; transition:fill .3s ease; }
+  .builder-ice{ opacity:0; transition:opacity .25s ease; }
+  .builder-ice rect{ fill:#fff; opacity:.55; }
+  .builder-steam{ opacity:0; transition:opacity .25s ease; color:var(--ink-soft); }
+  .builder-steam path{ transform-origin:center bottom; animation:builderSteamRise 3s ease-in-out infinite; }
+  .builder-steam path:last-child{ animation-delay:.6s; }
+  @keyframes builderSteamRise{ 0%,100%{ opacity:.35; transform:translateY(0); } 50%{ opacity:.85; transform:translateY(-4px); } }
+  @media (prefers-reduced-motion: reduce){ .builder-steam path{ animation:none; } }
+  .builder-name{ font-size:21px; }
+  .builder-specs{ width:100%; max-width:280px; margin:0 auto; }
+  .builder-spec-row{
+    display:flex; align-items:baseline; justify-content:space-between; gap:12px;
+    padding:8px 0; border-bottom:1px dashed var(--line); font-size:13.5px; text-align:start;
+  }
+  .builder-spec-row dt{ margin:0; color:var(--ink-soft); }
+  .builder-spec-row dd{ margin:0; font-weight:700; color:var(--ink-heading); text-align:end; }
+  .builder-actions{ display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:4px; }
+  .builder-actions .btn{ padding:11px 20px; font-size:13px; }
+  .builder-note{ font-size:12px; color:var(--ink-soft); font-style:italic; max-width:320px; }
+  html[lang="ar"] .builder-note{ font-style:normal; }
+  @media (max-width:860px){ .builder-preview{ position:static; } }
 
   .visit-note{ font-size:12px; color:var(--ink-soft); font-style:italic; margin-top:6px; }
   html[lang="ar"] .visit-note{ font-style:normal; }
@@ -300,6 +330,7 @@
     <g id="i-arrow"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
     <g id="i-menu"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></g>
     <g id="i-close"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></g>
+    <g id="i-copy"><rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g>
   </defs>
 </svg>
 
@@ -413,18 +444,93 @@
 
   <div class="divider"><span class="divider-mark"></span></div>
 
-  <!-- ============ ATMOSPHERE ============ -->
-  <section id="atmosphere">
+  <!-- ============ BE THE BARISTA — DRINK BUILDER ============ -->
+  <section id="barista">
     <div class="container">
       <div class="section-head center" data-reveal>
-        <span class="eyebrow" data-i18n="moodEyebrow"></span>
-        <h2 data-i18n="moodTitle"></h2>
-        <p data-i18n="moodLead"></p>
+        <span class="eyebrow" data-i18n="baristaEyebrow"></span>
+        <h2 data-i18n="baristaTitle"></h2>
+        <p data-i18n="baristaLead"></p>
       </div>
-      <div class="mood-grid">
-        <div class="mood-card gold" data-reveal><div class="mood-bg"></div><span data-i18n="moodGolden"></span></div>
-        <div class="mood-card terrace" data-reveal><div class="mood-bg"></div><span data-i18n="moodTerrace"></span></div>
-        <div class="mood-card night" data-reveal><div class="mood-bg"></div><span data-i18n="moodNight"></span></div>
+      <div class="builder" data-reveal>
+        <div class="builder-controls">
+          <div class="builder-group">
+            <span class="builder-group-label" data-i18n="builderBaseLabel"></span>
+            <div class="builder-options" data-group="base">
+              <button type="button" class="builder-chip" data-value="espresso" aria-pressed="true" data-i18n="baseEspresso"></button>
+              <button type="button" class="builder-chip" data-value="matcha" data-i18n="baseMatcha"></button>
+              <button type="button" class="builder-chip" data-value="fruitTea" data-i18n="baseFruitTea"></button>
+              <button type="button" class="builder-chip" data-value="milk" data-i18n="baseMilk"></button>
+            </div>
+          </div>
+          <div class="builder-group">
+            <span class="builder-group-label" data-i18n="builderTempLabel"></span>
+            <div class="builder-options" data-group="temp">
+              <button type="button" class="builder-chip" data-value="hot" aria-pressed="true" data-i18n="tempHot"></button>
+              <button type="button" class="builder-chip" data-value="iced" data-i18n="tempIced"></button>
+            </div>
+          </div>
+          <div class="builder-group">
+            <span class="builder-group-label" data-i18n="builderMilkLabel"></span>
+            <div class="builder-options" data-group="milk">
+              <button type="button" class="builder-chip" data-value="whole" aria-pressed="true" data-i18n="milkWhole"></button>
+              <button type="button" class="builder-chip" data-value="oat" data-i18n="milkOat"></button>
+              <button type="button" class="builder-chip" data-value="almond" data-i18n="milkAlmond"></button>
+              <button type="button" class="builder-chip" data-value="none" data-i18n="milkNone"></button>
+            </div>
+          </div>
+          <div class="builder-group">
+            <span class="builder-group-label" data-i18n="builderSweetLabel"></span>
+            <div class="builder-options" data-group="sweet">
+              <button type="button" class="builder-chip" data-value="none" data-i18n="sweetNone"></button>
+              <button type="button" class="builder-chip" data-value="light" aria-pressed="true" data-i18n="sweetLight"></button>
+              <button type="button" class="builder-chip" data-value="regular" data-i18n="sweetRegular"></button>
+              <button type="button" class="builder-chip" data-value="extra" data-i18n="sweetExtra"></button>
+            </div>
+          </div>
+          <div class="builder-group">
+            <span class="builder-group-label" data-i18n="builderFlavorLabel"></span>
+            <div class="builder-options" data-group="flavor">
+              <button type="button" class="builder-chip" data-value="none" aria-pressed="true" data-i18n="flavorNone"></button>
+              <button type="button" class="builder-chip" data-value="vanilla" data-i18n="flavorVanilla"></button>
+              <button type="button" class="builder-chip" data-value="caramel" data-i18n="flavorCaramel"></button>
+              <button type="button" class="builder-chip" data-value="hazelnut" data-i18n="flavorHazelnut"></button>
+              <button type="button" class="builder-chip" data-value="mint" data-i18n="flavorMint"></button>
+              <button type="button" class="builder-chip" data-value="berry" data-i18n="flavorBerry"></button>
+            </div>
+          </div>
+        </div>
+        <div class="builder-preview">
+          <svg class="builder-cup-svg" viewBox="0 0 160 210" aria-hidden="true">
+            <g id="builderSteam" class="builder-steam">
+              <path d="M62 26 q12 -14 0 -28" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+              <path d="M92 26 q12 -14 0 -28" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            </g>
+            <defs>
+              <clipPath id="builderCupClip"><path d="M28 34 L45 195 Q80 206 115 195 L132 34 Z"/></clipPath>
+            </defs>
+            <rect id="builderLiquidFill" x="18" y="70" width="124" height="140" clip-path="url(#builderCupClip)"/>
+            <g id="builderIce" class="builder-ice" clip-path="url(#builderCupClip)">
+              <rect x="55" y="78" width="20" height="20" rx="4" transform="rotate(12 65 88)"/>
+              <rect x="88" y="100" width="18" height="18" rx="4" transform="rotate(-10 97 109)"/>
+              <rect x="62" y="122" width="16" height="16" rx="4" transform="rotate(18 70 130)"/>
+            </g>
+            <path d="M28 34 L45 195 Q80 206 115 195 L132 34 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+            <ellipse cx="80" cy="34" rx="52" ry="10" fill="none" stroke="currentColor" stroke-width="3"/>
+            <rect id="builderStrawEl" x="73" y="-2" width="9" height="42" rx="4" fill="currentColor" opacity=".55"/>
+          </svg>
+          <h3 id="builderName" class="builder-name"></h3>
+          <dl class="builder-specs" id="builderSpecs"></dl>
+          <div class="builder-actions">
+            <button type="button" id="builderCopyBtn" class="btn btn-ghost">
+              <svg><use href="#i-copy"/></svg><span data-i18n="builderCopy"></span>
+            </button>
+            <a class="btn btn-primary" href="https://www.instagram.com/savva_cafe" target="_blank" rel="noopener">
+              <svg><use href="#i-instagram"/></svg><span data-i18n="builderShare"></span>
+            </a>
+          </div>
+          <p class="builder-note" data-i18n="builderNote"></p>
+        </div>
       </div>
     </div>
   </section>
@@ -515,8 +621,18 @@
       menuKunafa:"Kunafa", menuKunafaDesc:"Traditional kunafa, warm and syrup-soaked.",
       drinkCta:"See on Instagram",
       menuNote:"Full menu and current prices are available in-café and on Instagram.",
-      moodEyebrow:"The Atmosphere", moodTitle:"Where evenings slow down", moodLead:"No two visits to Savva feel quite the same — the atmosphere shifts gently through the day.",
-      moodGolden:"Golden Hour", moodTerrace:"Outdoor Terrace", moodNight:"Late Night",
+      baristaEyebrow:"Be the Barista", baristaTitle:"Build your own drink",
+      baristaLead:"Mix a base, milk, sweetness and flavour into something that's yours — then bring it to us.",
+      builderBaseLabel:"Base", builderTempLabel:"Style", builderMilkLabel:"Milk", builderSweetLabel:"Sweetness", builderFlavorLabel:"Flavour",
+      baseEspresso:"Espresso", baseMatcha:"Matcha", baseFruitTea:"Fruit Tea", baseMilk:"Milk",
+      tempHot:"Hot", tempIced:"Iced",
+      milkWhole:"Whole", milkOat:"Oat", milkAlmond:"Almond", milkNone:"No Milk",
+      sweetNone:"No Sugar", sweetLight:"Light", sweetRegular:"Regular", sweetExtra:"Extra Sweet",
+      flavorNone:"None", flavorVanilla:"Vanilla", flavorCaramel:"Caramel", flavorHazelnut:"Hazelnut", flavorMint:"Mint", flavorBerry:"Berry",
+      specBase:"Base", specStyle:"Style", specMilk:"Milk", specSweet:"Sweetness", specFlavor:"Flavour",
+      builderCopy:"Copy Recipe", builderCopied:"Copied!",
+      builderShare:"Message Us",
+      builderNote:"Not an official menu item — copy your recipe and send it to us on Instagram, and we'll do our best to make it when you visit.",
       visitAddress:"Zubairah Al Roumiah, Bir Uthman, Madinah 42331, Saudi Arabia",
       visitHours:"Daily · 5:00 PM – 12:00 AM",
       visitNote:"Typical hours — please confirm on Google Maps before visiting.",
@@ -555,8 +671,18 @@
       menuKunafa:"كنافة", menuKunafaDesc:"كنافة تقليدية دافئة ومغموسة بالقطر.",
       drinkCta:"عرض على إنستغرام",
       menuNote:"القائمة الكاملة والأسعار الحالية متوفرة داخل المقهى وعلى إنستغرام.",
-      moodEyebrow:"الأجواء", moodTitle:"حيث تتمهّل الأمسيات", moodLead:"لا تشبه زيارة سافا الأخرى — تتبدّل الأجواء بلطف مع ساعات اليوم.",
-      moodGolden:"الساعة الذهبية", moodTerrace:"التراس الخارجي", moodNight:"سهرة متأخرة",
+      baristaEyebrow:"كن الباريستا", baristaTitle:"اصنع مشروبك الخاص",
+      baristaLead:"امزج قاعدة وحليب ودرجة تحلية ونكهة لتصنع شيئًا خاصًا بك — ثم أحضره إلينا.",
+      builderBaseLabel:"القاعدة", builderTempLabel:"النوع", builderMilkLabel:"الحليب", builderSweetLabel:"التحلية", builderFlavorLabel:"النكهة",
+      baseEspresso:"إسبريسو", baseMatcha:"ماتشا", baseFruitTea:"شاي بالفواكه", baseMilk:"حليب",
+      tempHot:"ساخن", tempIced:"مثلج",
+      milkWhole:"حليب كامل", milkOat:"حليب الشوفان", milkAlmond:"حليب اللوز", milkNone:"بدون حليب",
+      sweetNone:"بدون سكر", sweetLight:"خفيف", sweetRegular:"عادي", sweetExtra:"حلو زيادة",
+      flavorNone:"بدون", flavorVanilla:"فانيليا", flavorCaramel:"كراميل", flavorHazelnut:"بندق", flavorMint:"نعناع", flavorBerry:"توت",
+      specBase:"القاعدة", specStyle:"النوع", specMilk:"الحليب", specSweet:"التحلية", specFlavor:"النكهة",
+      builderCopy:"انسخ الوصفة", builderCopied:"تم النسخ!",
+      builderShare:"راسلنا",
+      builderNote:"هذا ليس صنفًا رسميًا في القائمة — انسخ وصفتك وأرسلها لنا على إنستغرام، وسنبذل قصارى جهدنا لتحضيرها عند زيارتك.",
       visitAddress:"زبيرة الرومية، بئر عثمان، المدينة المنورة 42331، السعودية",
       visitHours:"يوميًا · 5:00 م – 12:00 ص",
       visitNote:"أوقات تقريبية — يرجى التأكد عبر خرائط جوجل قبل الزيارة.",
@@ -601,7 +727,8 @@
   var ICON_VIEWBOX = {
     "i-cup":"0 0 24 24","i-pin":"0 0 24 24","i-clock":"0 0 24 24","i-phone":"0 0 24 24",
     "i-instagram":"0 0 24 24","i-music":"0 0 24 24","i-users":"0 0 24 24","i-trees":"0 0 24 24",
-    "i-leaf":"0 0 24 24","i-arrow":"0 0 24 24","i-menu":"0 0 24 24","i-close":"0 0 24 24"
+    "i-leaf":"0 0 24 24","i-arrow":"0 0 24 24","i-menu":"0 0 24 24","i-close":"0 0 24 24",
+    "i-copy":"0 0 24 24"
   };
   function hydrateIcons(root){
     if(!root) return;
@@ -656,7 +783,111 @@
     state.lang = btn.getAttribute("data-lang");
     applyLanguage();
     renderDrinks();
+    renderBuilder();
   });
+
+  /* =====================================================
+     BE THE BARISTA — build-your-own-drink tool. Pure front
+     end fun: it doesn't place a real order (Savva has no
+     online ordering system — see footer/menu notes), it just
+     lets a visitor design a drink, then hands them a copyable
+     recipe to bring or message to the café themselves.
+     ===================================================== */
+  var BUILDER_LABEL_KEYS = {
+    base:{ espresso:"baseEspresso", matcha:"baseMatcha", fruitTea:"baseFruitTea", milk:"baseMilk" },
+    temp:{ hot:"tempHot", iced:"tempIced" },
+    milk:{ whole:"milkWhole", oat:"milkOat", almond:"milkAlmond", none:"milkNone" },
+    sweet:{ none:"sweetNone", light:"sweetLight", regular:"sweetRegular", extra:"sweetExtra" },
+    flavor:{ none:"flavorNone", vanilla:"flavorVanilla", caramel:"flavorCaramel", hazelnut:"flavorHazelnut", mint:"flavorMint", berry:"flavorBerry" }
+  };
+  var BUILDER_LIQUID_COLOR = { espresso:"#6B4226", matcha:"#7C9A5B", fruitTea:"#B23A4E", milk:"#EFE6D5" };
+  var BUILDER_FLAVOR_TINT = { vanilla:"#F3D9A4", caramel:"#B97A32", hazelnut:"#8A5A34", mint:"#6FBF8B", berry:"#A83B57" };
+  var builderState = { base:"espresso", temp:"hot", milk:"whole", sweet:"light", flavor:"none" };
+  var builderSection = document.getElementById("barista");
+
+  function builderLiquidColor(){
+    var base = BUILDER_LIQUID_COLOR[builderState.base];
+    var tint = BUILDER_FLAVOR_TINT[builderState.flavor];
+    if(!tint) return base;
+    if(window.CSS && CSS.supports && CSS.supports("color", "color-mix(in srgb, red 50%, blue)")){
+      return "color-mix(in srgb, " + base + " 65%, " + tint + " 35%)";
+    }
+    return tint;
+  }
+
+  function renderBuilder(){
+    if(!builderSection) return;
+    builderSection.querySelectorAll(".builder-options").forEach(function(group){
+      var key = group.getAttribute("data-group");
+      group.querySelectorAll(".builder-chip").forEach(function(chip){
+        chip.setAttribute("aria-pressed", chip.getAttribute("data-value") === builderState[key] ? "true" : "false");
+      });
+    });
+
+    var liquid = document.getElementById("builderLiquidFill");
+    if(liquid) liquid.style.fill = builderLiquidColor();
+    var ice = document.getElementById("builderIce");
+    if(ice) ice.style.opacity = builderState.temp === "iced" ? "1" : "0";
+    var steam = document.getElementById("builderSteam");
+    if(steam) steam.style.opacity = builderState.temp === "hot" ? "1" : "0";
+    var straw = document.getElementById("builderStrawEl");
+    if(straw) straw.style.opacity = builderState.temp === "hot" ? "0" : "1";
+
+    var flavorWord = builderState.flavor !== "none" ? t(BUILDER_LABEL_KEYS.flavor[builderState.flavor]) : "";
+    var milkWord = (builderState.milk === "oat" || builderState.milk === "almond") ? t(BUILDER_LABEL_KEYS.milk[builderState.milk]) : "";
+    var tempWord = builderState.temp === "iced" ? t("tempIced") : "";
+    var baseWord = t(BUILDER_LABEL_KEYS.base[builderState.base]);
+    var nameParts = [tempWord, flavorWord, milkWord, baseWord].filter(Boolean);
+    var nameEl = document.getElementById("builderName");
+    if(nameEl) nameEl.textContent = nameParts.join(" ");
+
+    var specs = [
+      [t("specBase"), t(BUILDER_LABEL_KEYS.base[builderState.base])],
+      [t("specStyle"), t(BUILDER_LABEL_KEYS.temp[builderState.temp])],
+      [t("specMilk"), t(BUILDER_LABEL_KEYS.milk[builderState.milk])],
+      [t("specSweet"), t(BUILDER_LABEL_KEYS.sweet[builderState.sweet])],
+      [t("specFlavor"), t(BUILDER_LABEL_KEYS.flavor[builderState.flavor])]
+    ];
+    var specsEl = document.getElementById("builderSpecs");
+    if(specsEl){
+      specsEl.innerHTML = specs.map(function(row){
+        return '<div class="builder-spec-row"><dt>' + row[0] + '</dt><dd>' + row[1] + '</dd></div>';
+      }).join("");
+    }
+  }
+
+  if(builderSection){
+    builderSection.querySelectorAll(".builder-options").forEach(function(group){
+      group.addEventListener("click", function(e){
+        var chip = e.target.closest(".builder-chip");
+        if(!chip) return;
+        var key = group.getAttribute("data-group");
+        builderState[key] = chip.getAttribute("data-value");
+        renderBuilder();
+      });
+    });
+    var copyBtn = document.getElementById("builderCopyBtn");
+    if(copyBtn){
+      copyBtn.addEventListener("click", function(){
+        var name = document.getElementById("builderName").textContent;
+        var lines = Array.prototype.slice.call(document.querySelectorAll("#builderSpecs .builder-spec-row")).map(function(row){
+          return row.querySelector("dt").textContent + ": " + row.querySelector("dd").textContent;
+        });
+        var text = name + "\n" + lines.join("\n");
+        var label = copyBtn.querySelector("span");
+        var original = label ? label.textContent : "";
+        function showCopied(){
+          if(label) label.textContent = t("builderCopied");
+          setTimeout(function(){ if(label) label.textContent = original; }, 1600);
+        }
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(text).then(showCopied, showCopied);
+        }else{
+          showCopied();
+        }
+      });
+    }
+  }
 
   var hamburgerBtn = document.getElementById("hamburgerBtn");
   var mobileNav = document.getElementById("mobileNav");
@@ -698,12 +929,6 @@
     });
   }
 
-  /* =====================================================
-     HERO CANVAS — rising steam/ember particles, slow drift,
-     gentle pointer parallax. Same recipe as body-sculptor's
-     atmosphere effect (canvas 2D, DPR clamp, reduced-motion
-     guard) with a different motif suited to a coffee house.
-     ===================================================== */
   /* =====================================================
      HERO ORB PARALLAX — the floating drinks drift gently
      toward the cursor, closer orbs (higher data-depth) move
@@ -763,6 +988,7 @@
   hydrateIcons(document);
   applyLanguage();
   renderDrinks();
+  renderBuilder();
   initNavMagnify();
   initHeroOrbParallax();
   initScrollReveal();
