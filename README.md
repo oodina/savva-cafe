@@ -4,6 +4,8 @@ A bilingual (English / Arabic, full RTL) one-page site for **Savva** (سافا),
 specialty coffee house in Madinah, Saudi Arabia. Single self-contained
 `index.html` — no build step, no framework.
 
+Deployed via GitHub Pages, and (once account verification clears) Vercel.
+
 ## What's real vs. placeholder
 
 Built from two sources only: a Google Maps pin and the `@savva_cafe`
