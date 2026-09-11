@@ -227,6 +227,14 @@
   html[lang="ar"] .menu-note{ font-style:normal; }
 
   /* ---------- Be the barista: drink builder ---------- */
+  .barista-tabs{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:36px; }
+  .barista-tab{
+    padding:11px 26px; border-radius:999px; border:1px solid var(--line); background:var(--surface);
+    color:var(--ink-soft); font-size:13.5px; font-weight:700; cursor:pointer;
+    transition:transform .18s cubic-bezier(.25,1,.35,1), background .18s ease, color .18s ease, border-color .18s ease;
+  }
+  .barista-tab[aria-pressed="true"]{ background:var(--accent); color:var(--primary-ink); border-color:var(--accent); transform:scale(1.06); }
+  .barista-tab:active{ transform:scale(1.1); }
   .builder{ display:grid; grid-template-columns:1.1fr .9fr; gap:44px; align-items:start; }
   @media (max-width:860px){ .builder{ grid-template-columns:1fr; } }
   .builder-controls{ display:flex; flex-direction:column; gap:22px; }
@@ -251,7 +259,7 @@
   .builder-cup-svg{ width:110px; height:145px; color:var(--ink-soft); overflow:visible; }
   #builderLiquidFill{ fill:#6B4226; transition:fill .3s ease; }
   .builder-ice{ opacity:0; transition:opacity .25s ease; }
-  .builder-ice rect{ fill:#fff; opacity:.55; }
+  .builder-ice rect{ fill:#fff; opacity:.55; transition:opacity .25s ease; }
   .builder-steam{ opacity:0; transition:opacity .25s ease; color:var(--ink-soft); }
   .builder-steam path{ transform-origin:center bottom; animation:builderSteamRise 3s ease-in-out infinite; }
   .builder-steam path:last-child{ animation-delay:.6s; }
@@ -452,6 +460,10 @@
         <h2 data-i18n="baristaTitle"></h2>
         <p data-i18n="baristaLead"></p>
       </div>
+      <div class="barista-tabs" id="baristaTabs" data-reveal>
+        <button type="button" class="barista-tab" data-cat="hot" aria-pressed="true" data-i18n="baristaTabHot"></button>
+        <button type="button" class="barista-tab" data-cat="cold" aria-pressed="false" data-i18n="baristaTabCold"></button>
+      </div>
       <div class="builder" data-reveal>
         <div class="builder-controls">
           <div class="builder-group">
@@ -463,11 +475,12 @@
               <button type="button" class="builder-chip" data-value="milk" data-i18n="baseMilk"></button>
             </div>
           </div>
-          <div class="builder-group">
-            <span class="builder-group-label" data-i18n="builderTempLabel"></span>
-            <div class="builder-options" data-group="temp">
-              <button type="button" class="builder-chip" data-value="hot" aria-pressed="true" data-i18n="tempHot"></button>
-              <button type="button" class="builder-chip" data-value="iced" data-i18n="tempIced"></button>
+          <div class="builder-group" id="builderIceGroup" hidden>
+            <span class="builder-group-label" data-i18n="builderIceLabel"></span>
+            <div class="builder-options" data-group="ice">
+              <button type="button" class="builder-chip" data-value="light" data-i18n="iceLight"></button>
+              <button type="button" class="builder-chip" data-value="regular" aria-pressed="true" data-i18n="iceRegular"></button>
+              <button type="button" class="builder-chip" data-value="extra" data-i18n="iceExtra"></button>
             </div>
           </div>
           <div class="builder-group">
@@ -511,9 +524,9 @@
             </defs>
             <rect id="builderLiquidFill" x="18" y="70" width="124" height="140" clip-path="url(#builderCupClip)"/>
             <g id="builderIce" class="builder-ice" clip-path="url(#builderCupClip)">
-              <rect x="55" y="78" width="20" height="20" rx="4" transform="rotate(12 65 88)"/>
-              <rect x="88" y="100" width="18" height="18" rx="4" transform="rotate(-10 97 109)"/>
-              <rect x="62" y="122" width="16" height="16" rx="4" transform="rotate(18 70 130)"/>
+              <rect data-cube="1" x="55" y="78" width="20" height="20" rx="4" transform="rotate(12 65 88)"/>
+              <rect data-cube="2" x="88" y="100" width="18" height="18" rx="4" transform="rotate(-10 97 109)"/>
+              <rect data-cube="3" x="62" y="122" width="16" height="16" rx="4" transform="rotate(18 70 130)"/>
             </g>
             <path d="M28 34 L45 195 Q80 206 115 195 L132 34 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
             <ellipse cx="80" cy="34" rx="52" ry="10" fill="none" stroke="currentColor" stroke-width="3"/>
@@ -623,9 +636,11 @@
       menuNote:"Full menu and current prices are available in-café and on Instagram.",
       baristaEyebrow:"Be the Barista", baristaTitle:"Build your own drink",
       baristaLead:"Mix a base, milk, sweetness and flavour into something that's yours — then bring it to us.",
-      builderBaseLabel:"Base", builderTempLabel:"Style", builderMilkLabel:"Milk", builderSweetLabel:"Sweetness", builderFlavorLabel:"Flavour",
+      baristaTabHot:"Hot Drinks", baristaTabCold:"Cold Drinks",
+      builderBaseLabel:"Base", builderIceLabel:"Ice Level", builderMilkLabel:"Milk", builderSweetLabel:"Sweetness", builderFlavorLabel:"Flavour",
       baseEspresso:"Espresso", baseMatcha:"Matcha", baseFruitTea:"Fruit Tea", baseMilk:"Milk",
       tempHot:"Hot", tempIced:"Iced",
+      iceLight:"Light Ice", iceRegular:"Regular Ice", iceExtra:"Extra Ice",
       milkWhole:"Whole", milkOat:"Oat", milkAlmond:"Almond", milkNone:"No Milk",
       sweetNone:"No Sugar", sweetLight:"Light", sweetRegular:"Regular", sweetExtra:"Extra Sweet",
       flavorNone:"None", flavorVanilla:"Vanilla", flavorCaramel:"Caramel", flavorHazelnut:"Hazelnut", flavorMint:"Mint", flavorBerry:"Berry",
@@ -673,9 +688,11 @@
       menuNote:"القائمة الكاملة والأسعار الحالية متوفرة داخل المقهى وعلى إنستغرام.",
       baristaEyebrow:"كن الباريستا", baristaTitle:"اصنع مشروبك الخاص",
       baristaLead:"امزج قاعدة وحليب ودرجة تحلية ونكهة لتصنع شيئًا خاصًا بك — ثم أحضره إلينا.",
-      builderBaseLabel:"القاعدة", builderTempLabel:"النوع", builderMilkLabel:"الحليب", builderSweetLabel:"التحلية", builderFlavorLabel:"النكهة",
+      baristaTabHot:"مشروبات ساخنة", baristaTabCold:"مشروبات باردة",
+      builderBaseLabel:"القاعدة", builderIceLabel:"كمية الثلج", builderMilkLabel:"الحليب", builderSweetLabel:"التحلية", builderFlavorLabel:"النكهة",
       baseEspresso:"إسبريسو", baseMatcha:"ماتشا", baseFruitTea:"شاي بالفواكه", baseMilk:"حليب",
       tempHot:"ساخن", tempIced:"مثلج",
+      iceLight:"ثلج خفيف", iceRegular:"ثلج عادي", iceExtra:"ثلج زيادة",
       milkWhole:"حليب كامل", milkOat:"حليب الشوفان", milkAlmond:"حليب اللوز", milkNone:"بدون حليب",
       sweetNone:"بدون سكر", sweetLight:"خفيف", sweetRegular:"عادي", sweetExtra:"حلو زيادة",
       flavorNone:"بدون", flavorVanilla:"فانيليا", flavorCaramel:"كراميل", flavorHazelnut:"بندق", flavorMint:"نعناع", flavorBerry:"توت",
@@ -795,19 +812,28 @@
      ===================================================== */
   var BUILDER_LABEL_KEYS = {
     base:{ espresso:"baseEspresso", matcha:"baseMatcha", fruitTea:"baseFruitTea", milk:"baseMilk" },
-    temp:{ hot:"tempHot", iced:"tempIced" },
     milk:{ whole:"milkWhole", oat:"milkOat", almond:"milkAlmond", none:"milkNone" },
     sweet:{ none:"sweetNone", light:"sweetLight", regular:"sweetRegular", extra:"sweetExtra" },
-    flavor:{ none:"flavorNone", vanilla:"flavorVanilla", caramel:"flavorCaramel", hazelnut:"flavorHazelnut", mint:"flavorMint", berry:"flavorBerry" }
+    flavor:{ none:"flavorNone", vanilla:"flavorVanilla", caramel:"flavorCaramel", hazelnut:"flavorHazelnut", mint:"flavorMint", berry:"flavorBerry" },
+    ice:{ light:"iceLight", regular:"iceRegular", extra:"iceExtra" }
   };
+  var BUILDER_ICE_CUBES = { light:1, regular:2, extra:3 };
   var BUILDER_LIQUID_COLOR = { espresso:"#6B4226", matcha:"#7C9A5B", fruitTea:"#B23A4E", milk:"#EFE6D5" };
   var BUILDER_FLAVOR_TINT = { vanilla:"#F3D9A4", caramel:"#B97A32", hazelnut:"#8A5A34", mint:"#6FBF8B", berry:"#A83B57" };
-  var builderState = { base:"espresso", temp:"hot", milk:"whole", sweet:"light", flavor:"none" };
+  // category: "hot" or "cold" — two separate builders sharing one set of
+  // controls; each remembers its own choices independently. Fruit Tea is
+  // cold-only (that's how it's always served, per the real menu), so the
+  // base chip is hidden and the base falls back to Espresso under Hot.
+  var builderState = {
+    hot:{ base:"espresso", milk:"whole", sweet:"light", flavor:"none" },
+    cold:{ base:"espresso", milk:"whole", sweet:"light", flavor:"none", ice:"regular" }
+  };
+  var builderCategory = "hot";
   var builderSection = document.getElementById("barista");
 
-  function builderLiquidColor(){
-    var base = BUILDER_LIQUID_COLOR[builderState.base];
-    var tint = BUILDER_FLAVOR_TINT[builderState.flavor];
+  function builderLiquidColor(state){
+    var base = BUILDER_LIQUID_COLOR[state.base];
+    var tint = BUILDER_FLAVOR_TINT[state.flavor];
     if(!tint) return base;
     if(window.CSS && CSS.supports && CSS.supports("color", "color-mix(in srgb, red 50%, blue)")){
       return "color-mix(in srgb, " + base + " 65%, " + tint + " 35%)";
@@ -817,36 +843,55 @@
 
   function renderBuilder(){
     if(!builderSection) return;
+    var state = builderState[builderCategory];
+    var isCold = builderCategory === "cold";
+
+    builderSection.querySelectorAll("#baristaTabs .barista-tab").forEach(function(tab){
+      tab.setAttribute("aria-pressed", tab.getAttribute("data-cat") === builderCategory ? "true" : "false");
+    });
+
+    var fruitTeaChip = builderSection.querySelector('.builder-chip[data-value="fruitTea"]');
+    if(fruitTeaChip) fruitTeaChip.hidden = !isCold;
+    var iceGroup = document.getElementById("builderIceGroup");
+    if(iceGroup) iceGroup.hidden = !isCold;
+
     builderSection.querySelectorAll(".builder-options").forEach(function(group){
       var key = group.getAttribute("data-group");
       group.querySelectorAll(".builder-chip").forEach(function(chip){
-        chip.setAttribute("aria-pressed", chip.getAttribute("data-value") === builderState[key] ? "true" : "false");
+        chip.setAttribute("aria-pressed", chip.getAttribute("data-value") === state[key] ? "true" : "false");
       });
     });
 
     var liquid = document.getElementById("builderLiquidFill");
-    if(liquid) liquid.style.fill = builderLiquidColor();
+    if(liquid) liquid.style.fill = builderLiquidColor(state);
     var ice = document.getElementById("builderIce");
-    if(ice) ice.style.opacity = builderState.temp === "iced" ? "1" : "0";
+    if(ice){
+      ice.style.opacity = isCold ? "1" : "0";
+      var cubeCount = isCold ? BUILDER_ICE_CUBES[state.ice] : 0;
+      ice.querySelectorAll("rect").forEach(function(cube){
+        cube.style.opacity = (parseInt(cube.getAttribute("data-cube"), 10) <= cubeCount) ? "" : "0";
+      });
+    }
     var steam = document.getElementById("builderSteam");
-    if(steam) steam.style.opacity = builderState.temp === "hot" ? "1" : "0";
+    if(steam) steam.style.opacity = isCold ? "0" : "1";
     var straw = document.getElementById("builderStrawEl");
-    if(straw) straw.style.opacity = builderState.temp === "hot" ? "0" : "1";
+    if(straw) straw.style.opacity = isCold ? "1" : "0";
 
-    var flavorWord = builderState.flavor !== "none" ? t(BUILDER_LABEL_KEYS.flavor[builderState.flavor]) : "";
-    var milkWord = (builderState.milk === "oat" || builderState.milk === "almond") ? t(BUILDER_LABEL_KEYS.milk[builderState.milk]) : "";
-    var tempWord = builderState.temp === "iced" ? t("tempIced") : "";
-    var baseWord = t(BUILDER_LABEL_KEYS.base[builderState.base]);
+    var flavorWord = state.flavor !== "none" ? t(BUILDER_LABEL_KEYS.flavor[state.flavor]) : "";
+    var milkWord = (state.milk === "oat" || state.milk === "almond") ? t(BUILDER_LABEL_KEYS.milk[state.milk]) : "";
+    var tempWord = isCold ? t("tempIced") : "";
+    var baseWord = t(BUILDER_LABEL_KEYS.base[state.base]);
     var nameParts = [tempWord, flavorWord, milkWord, baseWord].filter(Boolean);
     var nameEl = document.getElementById("builderName");
     if(nameEl) nameEl.textContent = nameParts.join(" ");
 
+    var styleValue = isCold ? (t("tempIced") + " · " + t(BUILDER_LABEL_KEYS.ice[state.ice])) : t("tempHot");
     var specs = [
-      [t("specBase"), t(BUILDER_LABEL_KEYS.base[builderState.base])],
-      [t("specStyle"), t(BUILDER_LABEL_KEYS.temp[builderState.temp])],
-      [t("specMilk"), t(BUILDER_LABEL_KEYS.milk[builderState.milk])],
-      [t("specSweet"), t(BUILDER_LABEL_KEYS.sweet[builderState.sweet])],
-      [t("specFlavor"), t(BUILDER_LABEL_KEYS.flavor[builderState.flavor])]
+      [t("specBase"), t(BUILDER_LABEL_KEYS.base[state.base])],
+      [t("specStyle"), styleValue],
+      [t("specMilk"), t(BUILDER_LABEL_KEYS.milk[state.milk])],
+      [t("specSweet"), t(BUILDER_LABEL_KEYS.sweet[state.sweet])],
+      [t("specFlavor"), t(BUILDER_LABEL_KEYS.flavor[state.flavor])]
     ];
     var specsEl = document.getElementById("builderSpecs");
     if(specsEl){
@@ -857,12 +902,21 @@
   }
 
   if(builderSection){
+    var baristaTabs = document.getElementById("baristaTabs");
+    if(baristaTabs){
+      baristaTabs.addEventListener("click", function(e){
+        var tab = e.target.closest(".barista-tab");
+        if(!tab) return;
+        builderCategory = tab.getAttribute("data-cat");
+        renderBuilder();
+      });
+    }
     builderSection.querySelectorAll(".builder-options").forEach(function(group){
       group.addEventListener("click", function(e){
         var chip = e.target.closest(".builder-chip");
-        if(!chip) return;
+        if(!chip || chip.hidden) return;
         var key = group.getAttribute("data-group");
-        builderState[key] = chip.getAttribute("data-value");
+        builderState[builderCategory][key] = chip.getAttribute("data-value");
         renderBuilder();
       });
     });
